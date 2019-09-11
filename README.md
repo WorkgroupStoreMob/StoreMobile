@@ -93,3 +93,58 @@ Optional:
 <img src=" height=200>
 
 ### [BONUS] Interactive" width=200>
+
+
+## SCHEMAS
+
+### Models
+
+**Store**
+
+
+| Property     | Type         | Description |
+| --------     | --------     | --------    |
+| objectId     | String         | unique id for the store owner to manage his store (default field)  |
+| name         | String         | Identifies a store by its name        |
+| phone        | String         | Allows anyone to contact the store administration        |
+| address       | String          | provides the physical location of a store        |
+| password     | String          | Allows a store administrator to manage this store        |
+| email        | String          | Allows anyone to contact the store administration       |
+| logo_store   | File         | Allows the SMob users to identify a all the stores by their logo        |
+| updatedAt   | DateTime         | date when a store is updated (default field)        |
+| createdAt   | DateTime         | date when a store is created (default field)       |
+
+
+
+**Product**
+
+
+
+| Property | Type | Description |
+| -------- | -------- | -------- |
+| objectId     | String     | unique id for the product to be identified in a store  (default field)     |
+| createdAt     | DateTime     | date when a product is created in a store (default field)     |
+| updatedAt     | DateTime     | date when a product is updated in a store (default field)     |
+| category_product     | String    | Allows to set the category of a product     |
+| image_product     | File     | Photo file that represent a specific product    |
+| description    | String     | Text     |
+| price     | Number     | Buying price of the product in a store at a given time     |
+| selling_price     | Number     | Selling price of the product in a store at a given time     |
+| qty_product     | Number     | Items quantity in a given category      |
+
+
+**Order**
+
+
+| Property | Type | Description |
+| -------- | -------- | -------- |
+| objectId     | String     | unique id for an order to be identified in a in a transaction  (default field)     |
+| product     | Pointer     | Product that is being sold     |
+| client     | Pointer     | Client who places the order    |
+| createdAt     | DateTime     | date of the transaction    |
+
+
+
+
+
+
