@@ -93,6 +93,7 @@ Optional:
 
 ### [BONUS] Interactive
 https://www.figma.com/proto/3YTosP5ds8BvoeTIoB56XB/Untitled?node-id=29%3A103&viewport=314%2C384%2C0.5&scaling=scale-down
+### Video Walthrough
 <img src="walthrough.gif" height=200>
 
 
