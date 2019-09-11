@@ -46,7 +46,6 @@ All traders in the formal and / or informal sector can present their products, w
 
 * Login 
 * Register - User signs up or logs into their account
-   * ...
 * Basket
    * Upon selecting items choice users can save chart for later action or buy items at once.
 * List store screen 
