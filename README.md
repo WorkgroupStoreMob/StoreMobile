@@ -89,9 +89,10 @@ Optional:
 <img src="storemobile.jpg" width=800><br>
 
 ### [BONUS] Digital Wireframes & Mockups
-<img src=" height=200>
+<img src="Smob.png" height=200>
 
-### [BONUS] Interactive" width=200>
+### [BONUS] Interactive
+<img src="https://www.figma.com/proto/3YTosP5ds8BvoeTIoB56XB/Untitled?node-id=7%3A16&viewport=-328%2C238%2C0.25&scaling=scale-down" height=200>
 
 
 ## SCHEMAS
