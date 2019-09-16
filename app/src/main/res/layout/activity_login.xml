@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OpenStoreActivity">
+    tools:context=".LoginActivity">
+
 
     <ImageView
         android:id="@+id/imageView3"
@@ -14,35 +15,24 @@
         android:layout_marginTop="10dp"
         app:srcCompat="@drawable/logo" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/imageView3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/open_my_store"
-        android:textSize="24sp" />
-
     <EditText
-        android:id="@+id/et_name_open_store"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/textView4"
-        android:layout_centerHorizontal="true"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/store_name"
-        />
+    android:id="@+id/et_username_login"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:layout_below="@id/imageView3"
+    android:layout_centerHorizontal="true"
+    android:ems="10"
+    android:inputType="textPersonName"
+    android:hint="@string/username"
+         />
 
     <EditText
         android:id="@+id/et_password_login"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_below="@id/et_name_open_store"
+        android:layout_below="@id/et_username_login"
         android:layout_centerHorizontal="true"
         android:ems="10"
         android:inputType="textPassword"
@@ -50,7 +40,7 @@
         />
 
     <Button
-        android:id="@+id/btn_login_open_store"
+        android:id="@+id/btn_login_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -63,7 +53,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_login_open_store"
+        android:layout_below="@id/btn_login_user"
         android:layout_marginLeft="35dp"
         android:layout_marginTop="20dp"
         android:text="@string/forget_your_password"
@@ -73,7 +63,7 @@
         android:id="@+id/textV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_login_open_store"
+        android:layout_below="@id/btn_login_user"
         android:layout_marginTop="20dp"
         android:layout_toEndOf="@id/textView"
         android:layout_marginStart="10dp"
@@ -104,7 +94,16 @@
         android:text="@string/create_one" />
 
 
-
+    <Button
+        android:id="@+id/btn_my_store_user_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="0dp"
+        android:text="@string/my_store" />
 
 
 </RelativeLayout>

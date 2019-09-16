@@ -5,89 +5,78 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AddItemsActivity">
-
+    tools:context=".SignUpActivity">
     <ImageView
-        android:id="@+id/iv_image_product"
-        android:layout_width="206dp"
-        android:layout_height="164dp"
+        android:id="@+id/ivLogoApp"
+        android:layout_width="333dp"
+        android:layout_height="77dp"
         android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:scaleType="centerCrop"
-        tools:srcCompat="@tools:sample/avatars" />
-
-
-    <Button
-        android:id="@+id/btn_add_image"
-        android:layout_width="207dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/add_image" />
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/logo" />
 
     <EditText
-        android:id="@+id/et_item_category"
+        android:id="@+id/et_username"
         android:layout_width="384dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="30dp"
         android:layout_gravity="center"
-        android:hint="@string/category"
+        android:hint="@string/username"
         />
 
     <EditText
-        android:id="@+id/et_item_buying_price"
+        android:id="@+id/et_password"
         android:layout_width="384dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="numberDecimal"
+        android:inputType="textPassword"
         android:layout_marginTop="5dp"
         android:layout_gravity="center"
-        android:hint="@string/buying_price"
+        android:hint="@string/password"
         />
 
     <EditText
-        android:id="@+id/et_item_selling_price"
+        android:id="@+id/et_confirm_password"
         android:layout_width="384dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="numberDecimal"
+        android:inputType="textPassword"
         android:layout_marginTop="5dp"
         android:layout_gravity="center"
-        android:hint="@string/selling_price"
-        />
+        android:hint="@string/confirm_password"
+        tools:ignore="TextFields" />
 
     <EditText
-        android:id="@+id/et_item_quantity"
+        android:id="@+id/et_user_phone"
         android:layout_width="384dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="phone"
         android:layout_marginTop="5dp"
         android:layout_gravity="center"
-        android:hint="@string/quantity"
+        android:hint="@string/phone_number"
+        />
+
+    <EditText
+        android:id="@+id/et_user_email"
+        android:layout_width="384dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center"
+        android:hint="@string/email"
         />
 
 
-    <EditText
-        android:id="@+id/et_item_description"
-        android:layout_width="382dp"
-        android:layout_height="75dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="@string/description"
-        android:inputType="textMultiLine" />
-
     <Button
-        android:id="@+id/btn_save_item"
+        android:id="@+id/btn_save_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
         android:layout_gravity="right"
         android:text="@string/save"
         />
-
 </LinearLayout>

@@ -1,9 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".StoreActivity">
 
-</android.support.constraint.ConstraintLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvStoreWelcome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_logo"
+        android:layout_above="@id/btnOpenStore"
+        android:layout_marginTop="15dp"
+        android:background="@color/colorLightBlue" />
+
+
+
+    <Button
+        android:id="@+id/btnOpenStore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="25dp"
+        android:text="@string/my_store" />
+
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="117dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="15dp"
+        android:contentDescription="@string/todo"
+        android:scaleType="centerCrop"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tv_store_name"
+        android:layout_width="188dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@id/iv_logo"
+        android:textSize="30sp"
+        tools:text="My Store" />
+
+</RelativeLayout>
