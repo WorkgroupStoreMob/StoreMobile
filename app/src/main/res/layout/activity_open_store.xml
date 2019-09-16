@@ -94,7 +94,7 @@
         android:textSize="18sp" />
 
     <Button
-        android:id="@+id/btn_sign_up_user"
+        android:id="@+id/btn_sign_up_open_store"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textVi"
