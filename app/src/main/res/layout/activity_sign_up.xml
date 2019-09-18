@@ -15,12 +15,23 @@
         app:srcCompat="@drawable/logo" />
 
     <EditText
-        android:id="@+id/et_username"
+        android:id="@+id/et_name_user"
         android:layout_width="384dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
         android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:hint="@string/name"
+        />
+
+    <EditText
+        android:id="@+id/et_username"
+        android:layout_width="384dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_marginTop="5dp"
         android:layout_gravity="center"
         android:hint="@string/username"
         />
