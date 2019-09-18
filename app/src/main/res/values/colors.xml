@@ -5,4 +5,6 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorLightBlue">#BDE0F4</color>
     <color name="colorDarkLightBlue">#95CFF0</color>
+    <color name="colorRougeApp">#FF000000</color>
+    <color name="colorBlueLogo">#393185</color>
 </resources>
