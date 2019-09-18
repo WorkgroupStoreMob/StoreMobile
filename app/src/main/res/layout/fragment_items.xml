@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorDarkLightBlue"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,6 +12,7 @@
         android:id="@+id/rvFragmentStore"
         android:layout_above="@id/btnAddItems"
         android:layout_below="@id/tv_business_name"
+        android:background="@color/colorLightBlue"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -32,6 +34,7 @@
         android:layout_height="wrap_content"
         android:textSize="30sp"
         android:layout_centerHorizontal="true"
+        android:textColor="@color/colorRougeApp"
         android:layout_marginTop="10dp"
         tools:text="My Business" />
 

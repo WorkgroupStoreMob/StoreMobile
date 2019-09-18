@@ -27,7 +27,7 @@
 
     <EditText
         android:id="@+id/et_name_open_store"
-        android:layout_width="350dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_below="@id/textView4"
@@ -39,7 +39,7 @@
 
     <EditText
         android:id="@+id/et_password_login"
-        android:layout_width="350dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_below="@id/et_name_open_store"
@@ -80,6 +80,7 @@
         android:linksClickable="true"
         android:autoLink="all"
         android:text="@string/click_here"
+        android:focusable="true"
         android:textColorLink="#0000FF"
         android:textSize="18sp" />
 
@@ -102,8 +103,6 @@
         android:layout_marginTop="9dp"
         android:layout_marginEnd="114dp"
         android:text="@string/create_one" />
-
-
 
 
 
