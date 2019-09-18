@@ -1,4 +1,8 @@
 package models;
 
-public class Store {
+import com.parse.ParseClassName;
+import com.parse.ParseObject;
+
+@ParseClassName( "Store" )
+public class Store extends ParseObject {
 }
