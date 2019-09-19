@@ -30,7 +30,7 @@ public class Store extends ParseObject {
         put(KEY_IMAGE, parseFile);
     }
 
-    public String getName(){
+    public  String getName(){
         return getString( KEY_NAME );
     }
 

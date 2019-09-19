@@ -26,7 +26,7 @@
 
     <EditText
         android:id="@+id/et_item_category"
-        android:layout_width="384dp"
+        android:layout_width="312dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
@@ -37,10 +37,10 @@
 
     <EditText
         android:id="@+id/et_item_buying_price"
-        android:layout_width="384dp"
+        android:layout_width="312dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="numberDecimal"
+        android:inputType="text"
         android:layout_marginTop="5dp"
         android:layout_gravity="center"
         android:hint="@string/buying_price"
@@ -48,10 +48,10 @@
 
     <EditText
         android:id="@+id/et_item_selling_price"
-        android:layout_width="384dp"
+        android:layout_width="312dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="numberDecimal"
+        android:inputType="text"
         android:layout_marginTop="5dp"
         android:layout_gravity="center"
         android:hint="@string/selling_price"
@@ -59,7 +59,7 @@
 
     <EditText
         android:id="@+id/et_item_quantity"
-        android:layout_width="384dp"
+        android:layout_width="312dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="phone"
@@ -71,7 +71,7 @@
 
     <EditText
         android:id="@+id/et_item_description"
-        android:layout_width="382dp"
+        android:layout_width="312dp"
         android:layout_height="75dp"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
@@ -85,7 +85,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginEnd="35dp"
         android:layout_gravity="right"
         android:text="@string/save"
         />
