@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container_item"
+    android:layout_width="match_parent"
+    android:background="@color/colorLightBlue"
+    android:layout_margin="10dp"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/iv_items_welcome"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tv_items_welcome_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/iv_items_welcome"
+        android:layout_marginStart="10dp"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        tools:text="@string/category" />
+
+
+    <TextView
+        android:id="@+id/tv_items_welcome_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/tv_items_welcome_category"
+        android:layout_marginStart="10dp"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        tools:text="price" />
+
+    <TextView
+        android:id="@+id/tv_items_welcome_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_items_welcome_category"
+        android:layout_marginLeft="10dp"
+        android:layout_toEndOf="@id/iv_items_welcome"
+        android:layout_marginStart="10dp"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        tools:text="price" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="38dp"
+        android:layout_height="35dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="20dp"
+        android:background="@color/colorLightBlue"
+        app:srcCompat="@drawable/ic_business_center_black_24dp" />
+</RelativeLayout>

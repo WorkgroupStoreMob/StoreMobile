@@ -26,7 +26,7 @@ public class Items extends ParseObject {
         put(KEY_DESCRIPTION, description);
     }
 
-    public ParseFile getImageStore(){
+    public ParseFile getImageItems(){
 
         return getParseFile( KEY_IMAGE_ITEM );
     }
