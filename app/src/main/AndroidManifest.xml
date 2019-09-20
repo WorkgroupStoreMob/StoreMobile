@@ -30,7 +30,13 @@
                android:name="android.support.FILE_PROVIDER_PATHS"
                android:resource="@xml/fileprovider"/>
 
+           <meta-data
+               android:name="android.support.FILE_PROVIDER_PATHS1"
+               android:resource="@xml/fileprovidergalery"/>
+
        </provider>
+
+
 
         <activity android:name=".OpenStoreActivity"></activity>
         <activity android:name=".SignUpActivity" />

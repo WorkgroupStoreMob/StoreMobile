@@ -43,6 +43,7 @@ public class AddItemsActivity extends AppCompatActivity {
     public final static int PICK_PHOTO_CODE = 1046;
     public String photoFileName = "photo.jpg";
     private File photoFile;
+    private File photoFileGalerry;
 
     public static final String TAG = "AddItemsActivity";
 
@@ -99,8 +100,7 @@ public class AddItemsActivity extends AppCompatActivity {
 //                    Toast.makeText( AddItemsActivity.this, "There is no photo", Toast.LENGTH_SHORT ).show();
 //                    return;
 //                }
-
-                saveItems( description, buyingPrice, price, category, photoFile );
+                saveItems( description, buyingPrice, price, category, photoFile, photoFileGalerry );
             }
         } );
     }
@@ -132,7 +132,11 @@ public class AddItemsActivity extends AppCompatActivity {
         // Create intent for picking a photo from the gallery
         Intent intent = new Intent( Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI );
-        photoFile = getPhotoFileUri(photoFileName);
+        photoFileGalerry = getPhotoFileUri(photoFileName);
+
+        Uri fileProvider = FileProvider.getUriForFile(this, "com.codepath.storemobile.fileprovider", photoFileGalerry);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
+
 
         // If you call startActivityForResult() using an intent that no app can handle, your app will crash.
         // So as long as the result is not null, it's safe to use the intent.
@@ -145,6 +149,7 @@ public class AddItemsActivity extends AppCompatActivity {
 
     private void launchCamera() {
         Intent i = new Intent( MediaStore.ACTION_IMAGE_CAPTURE);
+        photoFileGalerry = null;
         photoFile = getPhotoFileUri(photoFileName);
 
         // wrap File object into a content provider
@@ -180,7 +185,7 @@ public class AddItemsActivity extends AppCompatActivity {
                 Bitmap selectedImage = null;
                 try {
                     selectedImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoUri);
-                    String absolutePath = photoFile.getAbsolutePath();
+                    String absolutePath = photoFileGalerry.getAbsolutePath();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -211,7 +216,7 @@ public class AddItemsActivity extends AppCompatActivity {
 
 
         private void saveItems ( final String description,
-                String buyingPrice, String price, String category, File photoFile){
+                String buyingPrice, String price, String category, File photoFile, File photoFileGalerry){
 
             Items items = new Items();
             items.setDescriptionSotre( description );
@@ -219,7 +224,13 @@ public class AddItemsActivity extends AppCompatActivity {
             items.setCategory( category );
             items.setPrice( price );
            // items.setQuantity( quantity );
-            items.setImageStore( new ParseFile(photoFile ) );
+            if(photoFileGalerry != null){
+                items.setImageStore( new ParseFile(photoFileGalerry ) );
+            } else{
+                items.setImageStore( new ParseFile( photoFile) );
+            }
+
+
             //items.setStore( store );
 
             items.saveInBackground( new SaveCallback() {
