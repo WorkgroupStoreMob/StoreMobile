@@ -44,14 +44,21 @@ public class SignUpActivity extends AppCompatActivity {
                 String name = etNameUser.getText().toString();
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
-                //String confirmPassword = etConfirmPassword.getText().toString();
+                String confirmPassword = etConfirmPassword.getText().toString();
                 String email = etUserEmail.getText().toString();
 
                 ParseUser user = new ParseUser();
 
                 user.setUsername( username );
-                user.setPassword( password );
-                //user.setPassword( confirmPassword );
+
+                if (password == confirmPassword){
+
+                    user.setPassword( password );
+                    user.setPassword( confirmPassword );
+
+                } else {
+                    Toast.makeText( SignUpActivity.this, "Password should same", Toast.LENGTH_SHORT ).show();
+                }
 
                 user.setEmail( email );
                 user.put( "name", name );
@@ -70,6 +77,7 @@ public class SignUpActivity extends AppCompatActivity {
                         etUsername.setText("");
                         etPassword.setText("");
                         etUserEmail.setText("");
+                        etConfirmPassword.setText("");
 
                     }
                 } );
