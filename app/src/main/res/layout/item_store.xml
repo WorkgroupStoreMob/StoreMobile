@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginTop="10dp"
     android:id="@+id/storeContainer"
-    android:background="@color/colorBlueLogo"
+    android:background="@drawable/corner"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -14,6 +14,7 @@
         android:id="@+id/iv_logo_item_store"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:background="@drawable/corner"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -21,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/iv_logo_item_store"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/colorRougeApp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:textSize="24sp"
@@ -34,7 +35,7 @@
         android:layout_toEndOf="@id/iv_logo_item_store"
         android:layout_below="@id/tv_name_item_store"
         android:layout_marginTop="5dp"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:layout_marginLeft="10dp"
         android:textSize="18sp"
         tools:text="Store de l'elegence" />
