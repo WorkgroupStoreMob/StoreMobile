@@ -2,16 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.codepath.storemobile">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-
-
-
     <application
         android:name=".ParseApplication"
         android:allowBackup="true"
@@ -20,25 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ChartActivity"></activity>
 
-       <provider
-           android:name="android.support.v4.content.FileProvider"
-           android:authorities="com.codepath.storemobile.fileprovider"
-           android:exported="false"
-           android:grantUriPermissions="true">
-           <meta-data
-               android:name="android.support.FILE_PROVIDER_PATHS"
-               android:resource="@xml/fileprovider"/>
+        <activity android:name=".OpenStoreActivity" />
 
-           <meta-data
-               android:name="android.support.FILE_PROVIDER_PATHS1"
-               android:resource="@xml/fileprovidergalery"/>
-
-       </provider>
-
-
-
-        <activity android:name=".OpenStoreActivity"></activity>
         <activity android:name=".SignUpActivity" />
         <activity android:name=".ItemWelcomeActivity" />
         <activity android:name=".ItemActivity" />
@@ -54,9 +29,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.codepath.storemobile.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/fileprovider" />
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS1"
+                android:resource="@xml/fileprovidergalery" />
+        </provider>
     </application>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

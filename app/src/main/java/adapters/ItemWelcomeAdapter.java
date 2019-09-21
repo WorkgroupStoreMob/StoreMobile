@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -50,7 +51,7 @@ public class ItemWelcomeAdapter extends RecyclerView.Adapter<ItemWelcomeAdapter.
             e.printStackTrace();
         }
 
-        viewHolder.containerItemWelcome.setOnClickListener( new View.OnClickListener() {
+        viewHolder.ivBtnOrder.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent( context, LoginActivity.class );
@@ -80,8 +81,7 @@ public class ItemWelcomeAdapter extends RecyclerView.Adapter<ItemWelcomeAdapter.
         private TextView tvItemWelcomecategory;
         private TextView tvItemsPrice;
         private TextView tvItemsDescription;
-
-        RelativeLayout containerItemWelcome;
+        private ImageButton ivBtnOrder;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -91,7 +91,7 @@ public class ItemWelcomeAdapter extends RecyclerView.Adapter<ItemWelcomeAdapter.
             tvItemWelcomecategory = itemView.findViewById( R.id.tv_items_welcome_category );
             tvItemsPrice = itemView.findViewById( R.id.tv_items_welcome_price);
             tvItemsDescription = itemView.findViewById( R.id.tv_items_welcome_description);
-            containerItemWelcome = itemView.findViewById( R.id.container_item );
+           ivBtnOrder = itemView.findViewById( R.id.iv_btn_order);
         }
 
         public void bind(Items items) throws ParseException {

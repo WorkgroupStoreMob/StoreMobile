@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorDarkLightBlue"
     tools:context=".ItemActivity">
 
 
@@ -29,6 +30,7 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvItems"
+        android:background="@color/colorLightBlue"
         android:layout_below="@id/iv_logo2"
         android:layout_above="@id/btn_open_store2"
         android:layout_marginTop="10dp"
