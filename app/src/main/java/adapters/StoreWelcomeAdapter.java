@@ -56,6 +56,7 @@ public class StoreWelcomeAdapter extends RecyclerView.Adapter<StoreWelcomeAdapte
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent( context, ItemWelcomeActivity.class );
+                intent.putExtra("nameStore", store.getName());
                 context.startActivity( intent );
             }
         } );

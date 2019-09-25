@@ -56,9 +56,9 @@ public class ItemWelcomeActivity extends AppCompatActivity {
     private void queryItems() {
 
         ParseQuery<Items> itemsQuery = new ParseQuery<Items>( Items.class );
+        itemsQuery.whereEqualTo("store_name", getIntent().getStringExtra("nameStore"));
         itemsQuery.include( Items.KEY_CATEGORY );
         itemsQuery.include( Items.KEY_PRICE );
-        //postQuery.addDescendingOrder( Post.KEY_CREATED_AT );
         itemsQuery.findInBackground( new FindCallback<Items>() {
             @Override
             public void done(List<Items> items, ParseException e) {
