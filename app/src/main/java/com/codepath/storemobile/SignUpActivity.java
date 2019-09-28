@@ -39,26 +39,26 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText( SignUpActivity.this, "Test", Toast.LENGTH_SHORT).show();
+               // Toast.makeText( SignUpActivity.this, "Test", Toast.LENGTH_SHORT).show();
 
                 String name = etNameUser.getText().toString();
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
-                String confirmPassword = etConfirmPassword.getText().toString();
+               // String confirmPassword = etConfirmPassword.getText().toString();
                 String email = etUserEmail.getText().toString();
 
                 ParseUser user = new ParseUser();
 
                 user.setUsername( username );
+                user.setPassword( password );
 
-                if (password == confirmPassword){
-
-                    user.setPassword( password );
-                    user.setPassword( confirmPassword );
-
-                } else {
-                    Toast.makeText( SignUpActivity.this, "Password should same", Toast.LENGTH_SHORT ).show();
-                }
+//                if (password == confirmPassword){
+//
+//
+//                    //user.setPassword( confirmPassword );
+//                } else {
+//                    Toast.makeText( SignUpActivity.this, "Password should same", Toast.LENGTH_SHORT ).show();
+//                }
 
                 user.setEmail( email );
                 user.put( "name", name );
