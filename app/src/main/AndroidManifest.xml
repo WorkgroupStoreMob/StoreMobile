@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.codepath.storemobile">
 
+
     <application
         android:name=".ParseApplication"
         android:allowBackup="true"
