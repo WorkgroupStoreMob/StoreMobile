@@ -156,7 +156,6 @@ public class ItemWelcomeActivity extends AppCompatActivity {
                             for(int i = 0; i < litemsCart.size(); i++){
                                 if (String.valueOf(litemsCart.get(i).getCategory()).equals(category)){
                                     itemCart = new ItemCart(category, price, total, String.valueOf(qte), image);
-                                    Toast.makeText(ItemWelcomeActivity.this, String.valueOf(qte) , Toast.LENGTH_SHORT).show();
                                     litemsCart.remove(i);
                                     break;
                                 }
