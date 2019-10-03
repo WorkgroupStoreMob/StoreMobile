@@ -92,8 +92,16 @@ public class AddItemsActivity extends AppCompatActivity {
                 String buyingPrice = etbuyingPrice.getText().toString();
 
 
+                // If category is empty returns a toast message
+                if(category.isEmpty() || description.isEmpty() || price.isEmpty() || buyingPrice.isEmpty()){
+                    Toast.makeText(AddItemsActivity.this, "All the fields are required!", Toast.LENGTH_LONG).show();
+                    return;
+                }
 
-               // String storename = store.getName();
+
+
+
+                // String storename = store.getName();
 
 //                if (photoFile == null || image_item.getDrawable() == null) {
 //                    Log.e( TAG, "No Photo to post" );
