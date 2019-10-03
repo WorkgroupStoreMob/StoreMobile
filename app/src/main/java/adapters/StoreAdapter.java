@@ -89,10 +89,10 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
 
         public ViewHolder(@NonNull View itemView) {
             super( itemView );
-        ivItemStore = itemView.findViewById( R.id.iv_logo_item_store );
-        tvItemStoreName = itemView.findViewById( R.id.tv_name_item_store );
-        tvItemStoreDescription = itemView.findViewById( R.id.tv_description_item_store );
-        storeContainer = itemView.findViewById( R.id.storeContainer ) ;
+            ivItemStore = itemView.findViewById( R.id.iv_logo_item_store );
+            tvItemStoreName = itemView.findViewById( R.id.tv_name_item_store );
+            tvItemStoreDescription = itemView.findViewById( R.id.tv_description_item_store );
+            storeContainer = itemView.findViewById( R.id.storeContainer ) ;
         }
 
         public void bind(Store store) throws ParseException {
