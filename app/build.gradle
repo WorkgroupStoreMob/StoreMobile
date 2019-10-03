@@ -39,4 +39,10 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
 
     implementation 'com.karumi:dexter:5.0.0'
+
+    //parcelable
+    implementation 'org.parceler:parceler-api:1.1.12'
+    annotationProcessor 'org.parceler:parceler:1.1.12'
+
+    implementation 'com.cepheuen.elegant-number-button:lib:1.0.2'
 }

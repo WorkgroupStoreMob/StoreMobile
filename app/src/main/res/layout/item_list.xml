@@ -5,8 +5,8 @@
     android:id="@+id/items_CardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-   android:layout_margin="5dp"
-    app:cardCornerRadius="50dp">
+    android:layout_margin="5dp"
+    app:cardCornerRadius="10dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -60,7 +60,7 @@
             <android.support.v7.widget.AppCompatImageButton
                 android:id="@+id/iv_btn_order1"
                 android:layout_width="42dp"
-                android:layout_height="44dp"
+                android:layout_height="match_parent"
                 android:layout_marginRight="5dp"
                 android:background="#FFFFFF"
                 app:srcCompat="@drawable/ic_business_center_black_24dp" />

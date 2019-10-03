@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -28,17 +29,26 @@ public class ItemWelcomeAdapter extends RecyclerView.Adapter<ItemWelcomeAdapter.
 
     private Context context;
     private List<Items> listItems;
+    private OnItemClickListener monOnItemClickListener;
 
     public ItemWelcomeAdapter(Context context, List<Items> listItems) {
         this.context = context;
         this.listItems = listItems;
     }
 
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
+
+    public void SetOnItemClickListener(OnItemClickListener listener){
+        monOnItemClickListener = listener;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from( context ).inflate( R.layout.item_items_welcome, viewGroup, false );
-        return new ViewHolder( view );
+        return new ViewHolder( view , monOnItemClickListener);
     }
 
     @Override
@@ -51,13 +61,13 @@ public class ItemWelcomeAdapter extends RecyclerView.Adapter<ItemWelcomeAdapter.
             e.printStackTrace();
         }
 
-        viewHolder.ivBtnOrder.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent( context, LoginActivity.class );
-                context.startActivity( intent );
-            }
-        } );
+//        viewHolder.ivBtnOrder.setOnClickListener( new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent( context, LoginActivity.class );
+//                context.startActivity( intent );
+//            }
+//        } );
 
     }
 
@@ -84,27 +94,36 @@ public class ItemWelcomeAdapter extends RecyclerView.Adapter<ItemWelcomeAdapter.
         private ImageButton ivBtnOrder;
 
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super( itemView );
 
             ivItemWelcome = itemView.findViewById( R.id.iv_items_welcome );
             tvItemWelcomecategory = itemView.findViewById( R.id.tv_items_welcome_category );
             tvItemsPrice = itemView.findViewById( R.id.tv_items_welcome_price);
             tvItemsDescription = itemView.findViewById( R.id.tv_items_welcome_description);
-           ivBtnOrder = itemView.findViewById( R.id.iv_btn_order);
+            ivBtnOrder = itemView.findViewById( R.id.iv_btn_order);
+
+            ivBtnOrder.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null){
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION){
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
 
         public void bind(Items items) throws ParseException {
-
-
             tvItemWelcomecategory.setText( items.getCategory() );
-            tvItemsPrice.setText( items.getPrice() );
+            tvItemsPrice.setText("$"+items.getPrice() );
             ParseFile image = items.getImageItems();
             if (image != null) {
                 Glide.with( context ).load( image.getFile()).into( ivItemWelcome );
             }
             tvItemsDescription.setText( items.getDescriptionStore() );
-
         }
     }
 

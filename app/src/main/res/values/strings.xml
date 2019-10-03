@@ -25,4 +25,5 @@
     <string name="create_one">Create One</string>
     <string name="open_my_store">Open my Store</string>
     <string name="name">Name</string>
+    <string name="tvCounter">0</string>
 </resources>
