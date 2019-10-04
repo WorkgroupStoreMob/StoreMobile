@@ -1,10 +1,15 @@
 package com.codepath.storemobile;
 
 import android.app.Application;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +31,7 @@ public class CartActivity extends AppCompatActivity {
     private ItemCartAdapter itemCartAdapter;
     //private List<Items> litems;
     private List<ItemCart> litems;
+    private Button btnProcessOrder, btnSsaveOrder;
     RecyclerView rvItems;
     Double total = 0.0;
     TextView tv_total;
@@ -41,6 +47,36 @@ public class CartActivity extends AppCompatActivity {
         rvItems = findViewById( R.id.rvCarts );
         tv_total = findViewById(R.id.tv_total);
         tv_subTotal = findViewById(R.id.tv_subTotal);
+
+        btnProcessOrder = findViewById( R.id.btn_process_order );
+        btnSsaveOrder = findViewById( R.id.btn_save_order );
+
+
+        // launch payment activity
+
+        btnProcessOrder.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] colors = {"Credit Card", "Mon Cash"};
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
+                builder.setTitle("Choose a payment type");
+                builder.setItems(colors, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case 0:
+                               cardPayment();
+                               break;
+                            case 1:
+                                monCash();
+                                break;
+                        }
+                    }
+                });
+                builder.show();
+            }
+        } );
 
         // create data source
         litems = new ArrayList<>( );
@@ -66,5 +102,16 @@ public class CartActivity extends AppCompatActivity {
         //set layout manager in the recycler view
         rvItems.setLayoutManager( new LinearLayoutManager( CartActivity.this, LinearLayoutManager.HORIZONTAL,
                 false) );
+    }
+
+    private void monCash() {
+        Intent intentMonCash = new Intent( CartActivity.this, MonCashActivity.class );
+        startActivity( intentMonCash );
+
+    }
+
+    private void cardPayment() {
+        Intent intent = new Intent( CartActivity.this, PaymentActivity.class );
+        startActivity( intent );
     }
 }

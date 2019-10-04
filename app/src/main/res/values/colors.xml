@@ -7,4 +7,8 @@
     <color name="colorDarkLightBlue">#95CFF0</color>
     <color name="colorRougeApp">#FF000000</color>
     <color name="colorBlueLogo">#393185</color>
+
+    <color name="colorPrimary1">#607D8B</color>
+    <color name="colorPrimaryDark1">#455A64</color>
+    <color name="colorAccent1">#4CAF50</color>
 </resources>

@@ -45,4 +45,9 @@ dependencies {
     annotationProcessor 'org.parceler:parceler:1.1.12'
 
     implementation 'com.cepheuen.elegant-number-button:lib:1.0.2'
+
+    //credit card
+    implementation 'com.braintreepayments:card-form:3.4.1'
+
+    //implementation 'com.braintreepayments.api:braintree:3.7.0'
 }
