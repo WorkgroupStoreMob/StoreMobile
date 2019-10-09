@@ -35,5 +35,11 @@ public class ParseApplication extends Application {
                 .clientKey("IdappStoreMobilexxYYvvs578Workgroup")  // set explicitly unless clientKey is explicitly configured on Parse server
                 .clientBuilder(builder)
                 .server("https:storemob.herokuapp.com/parse").build());
+
+//        Parse.initialize(new Parse.Configuration.Builder(this)
+//                .applicationId("applicationstore") // should correspond to APP_ID env variable
+//                .clientKey("VGhfjTYAppStore54683GThuyXXttydesfVB")  // set explicitly unless clientKey is explicitly configured on Parse server
+//                .clientBuilder(builder)
+//                .server("https://applicationstore.herokuapp.com/parse").build());
     }
 }

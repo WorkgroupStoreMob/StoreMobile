@@ -2,16 +2,21 @@ package com.codepath.storemobile;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
 import com.parse.ParseQuery;
 
+import java.util.List;
+
+import adapters.StoreAdapter;
 import models.Store;
 
 public class OpenStoreActivity extends AppCompatActivity {
@@ -20,6 +25,11 @@ public class OpenStoreActivity extends AppCompatActivity {
     private Button btnCreateStore;
     private EditText etStoreName;
     private EditText etStorePassword;
+
+    private StoreAdapter storeAdapter;
+    private List<Store> lStore;
+
+    private static final String TAG = "OpenStoreActivity";
 
 
 
@@ -37,28 +47,47 @@ public class OpenStoreActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String storeName = etStoreName.getText().toString();
-                String storePassword = etStorePassword.getText().toString();
 
-                ParseQuery<Store> query = new ParseQuery<Store>( "Store" );
+                ParseQuery<Store> query = new ParseQuery<Store>( Store.class );
+                query.findInBackground( new FindCallback<Store>() {
+                    String storeName = etStoreName.getText().toString();
+                    String storePassword = etStorePassword.getText().toString();
+
+                    @Override
+                    public void done(List<Store> objects, ParseException e) {
+
+                        if (e != null) {
+                            Log.e( TAG, "Error with query" );
+                            e.printStackTrace();
+                            return;
+                        }
+
+                        for (int i = 0; i < objects.size(); i++) {
+
+                            if (storeName.equals(objects.get(i).getName()) || storePassword.equals(objects.get(i).getKeyPassword()) ){
+                                Intent intent = new Intent( OpenStoreActivity.this, ManageStoreActivity.class );
+                                startActivity( intent );
+                                break;
+                            } else {
+                                AlertDialog.Builder builder = new AlertDialog.Builder( OpenStoreActivity.this);
+                                builder.setTitle( "Store Login Error" );
+                                builder.setMessage( "username or password incorrect");
+                                builder.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                } );
+                                builder.show();
+                                break;
+                            }
+
+                        }
+
+                    }
+                } );
 
                 Store store = new Store();
-
-                if (storeName == store.getName() || storePassword == store.getKeyPassword() ){
-                    Intent intent = new Intent( OpenStoreActivity.this, ManageStoreActivity.class );
-                    startActivity( intent );
-                } else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder( OpenStoreActivity.this);
-                    builder.setTitle( "Store Login Error" );
-                    builder.setMessage( "username or password incorrect");
-                    builder.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    } );
-                    builder.show();
-                }
 
             }
         } );
@@ -71,4 +100,4 @@ public class OpenStoreActivity extends AppCompatActivity {
             }
         } );
     }
-}
+    }
