@@ -9,11 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.codepath.storemobile.AddItemsActivity;
 import com.codepath.storemobile.R;
 
 import java.io.File;
+
+import models.Store;
 
 public class FragmentItems extends Fragment {
 
@@ -24,6 +27,8 @@ public class FragmentItems extends Fragment {
     private File photoFile;
 
     private Button btnAddImage;
+
+    private TextView tvStoreName;
 
 
 
@@ -38,6 +43,9 @@ public class FragmentItems extends Fragment {
         super.onViewCreated( view, savedInstanceState );
 
         btnAddImage = view.findViewById( R.id.btnAddItems);
+
+        tvStoreName = view.findViewById( R.id.tv_business_name );
+        tvStoreName.setText( Store.KEY_NAME );
 
         btnAddImage.setOnClickListener( new View.OnClickListener() {
             @Override

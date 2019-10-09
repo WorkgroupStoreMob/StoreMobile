@@ -5,13 +5,13 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -36,10 +36,10 @@ public class CreateStore extends AppCompatActivity {
     private File photoFile;
     private File photoFileGalerry;
 
-    public static final String TAG = "CreateStoreActivity";
+    public static final String TAG = "CreateStore";
 
     private ImageView logoStore;
-    private EditText storename;
+    private EditText storeName;
     private EditText storePassword;
     private EditText storePasswordConfirmation;
     private EditText storePhone;
@@ -59,7 +59,7 @@ public class CreateStore extends AppCompatActivity {
         setContentView( R.layout.activity_create_store );
 
         logoStore = findViewById( R.id.iv_logo_store );
-        storename = findViewById( R.id.et_store_name );
+        storeName = findViewById( R.id.et_store_name );
         storePassword = findViewById( R.id.et_store_password );
         storePasswordConfirmation = findViewById( R.id.et_store_confirm_password );
         storePhone = findViewById( R.id.et_store_phone );
@@ -79,12 +79,14 @@ public class CreateStore extends AppCompatActivity {
         btnSave.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String store_Name = storename.getText().toString();
+                String store_Name = storeName.getText().toString();
                 String store_Description = storeDescription.getText().toString();
                 String store_Password = storePassword.getText().toString();
                 String store_Password_Confirm = storePasswordConfirmation.getText().toString();
                 String store_Email = storeEmail.getText().toString();
                 String store_Phone = storePhone.getText().toString();
+
+
 
                 // If category is empty returns a toast message
                 if(store_Name.isEmpty() || store_Description.isEmpty() || store_Password.isEmpty() || store_Password_Confirm.isEmpty()
@@ -92,10 +94,6 @@ public class CreateStore extends AppCompatActivity {
                     Toast.makeText(CreateStore.this, "All the fields are required!", Toast.LENGTH_LONG).show();
                     return;
                 }
-
-
-
-
 
 
                 // String storename = store.getName();
@@ -106,15 +104,33 @@ public class CreateStore extends AppCompatActivity {
 //                    return;
 //                }
                 saveStores(store_Name, store_Description, store_Password, store_Email, store_Phone, photoFile, photoFileGalerry );
+                //Store store = new Store();
+
                 Toast.makeText(CreateStore.this, "Store successfully saved!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent( CreateStore.this, ManageStoreActivity.class );
+                Intent intent = new Intent( CreateStore.this, OpenStoreActivity.class );
                 startActivity( intent );
+//                if (store_Name.equals(store.getName()) ){
+//                    AlertDialog.Builder builder = new AlertDialog.Builder( CreateStore.this);
+//                    builder.setTitle( "Duplicate Store Name" );
+//                    builder.setMessage( "Store Name already exist" + "ln choose another one");
+//                    builder.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            dialog.cancel();
+//                        }
+//                    } );
+//                    builder.show();
+//                } else {
+//                    Toast.makeText(CreateStore.this, "Store successfully saved!", Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent( CreateStore.this, OpenStoreActivity.class );
+//                    startActivity( intent );
+//                }
+
             }
         } );
     }
 
-
-    // Method showPictureDialog()
+    // Method for choose type of picture entry
     private void showPictureDialog() {
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder( this );
         pictureDialog.setTitle( "Select Action" );
@@ -234,7 +250,7 @@ public class CreateStore extends AppCompatActivity {
     private void saveStores (final String description, String name,
                              String password, String email, String phone, File photoFile, File photoFileGalerry){
 
-        Store stores = new Store();
+         Store stores = new Store();
         stores.setDescription( description );
         stores.setName( name );
         stores.setPassword( password );
@@ -260,9 +276,8 @@ public class CreateStore extends AppCompatActivity {
 
                 Log.d( TAG, "Success!" );
 
-
                 storeDescription.setText( "" );
-                storename.setText( "" );
+                storeName.setText( "" );
                 storeEmail.setText( "" );
                 storePhone.setText( "" );
                 // etquantity.setText( "" );
