@@ -11,7 +11,7 @@
     <FrameLayout
         android:id="@+id/flContainer"
         android:layout_above="@id/bottom_navigation"
-        android:layout_below="@id/iv_logo4"
+        android:layout_below="@id/ivLogoBusiness"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -22,18 +22,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <ImageView
-        android:id="@+id/iv_logo4"
-        android:layout_width="104dp"
-        android:layout_height="106dp"
-        tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/tv_store_name1"
+        android:id="@+id/tvBusinessName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_toEndOf="@id/iv_logo4"
-        android:textSize="30sp"
-        tools:text="My Store" />
+        android:layout_toEndOf="@id/ivLogoBusiness"
+        android:textSize="24sp"
+        tools:text="My business" />
+
+    <ImageView
+        android:id="@+id/ivLogoBusiness"
+        android:layout_marginLeft="10dp"
+        android:layout_width="97dp"
+        android:layout_height="53dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
 </RelativeLayout>

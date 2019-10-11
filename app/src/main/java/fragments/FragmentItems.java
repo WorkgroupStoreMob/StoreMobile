@@ -16,8 +16,6 @@ import com.codepath.storemobile.R;
 
 import java.io.File;
 
-import models.Store;
-
 public class FragmentItems extends Fragment {
 
     public static final String TAG = "FragmentItems";
@@ -44,10 +42,9 @@ public class FragmentItems extends Fragment {
 
         btnAddImage = view.findViewById( R.id.btnAddItems);
 
-        tvStoreName = view.findViewById( R.id.tv_business_name );
-        tvStoreName.setText( Store.KEY_NAME );
 
-        btnAddImage.setOnClickListener( new View.OnClickListener() {
+
+                btnAddImage.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent( getContext(), AddItemsActivity.class );
