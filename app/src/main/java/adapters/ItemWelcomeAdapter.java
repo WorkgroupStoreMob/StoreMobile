@@ -7,14 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.codepath.storemobile.ItemWelcomeActivity;
 import com.codepath.storemobile.LoginActivity;
 import com.codepath.storemobile.R;
 import com.parse.ParseException;
@@ -94,7 +91,7 @@ public class ItemWelcomeAdapter extends RecyclerView.Adapter<ItemWelcomeAdapter.
         private ImageButton ivBtnOrder;
 
 
-        public ViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
+        public ViewHolder(@NonNull final View itemView, final OnItemClickListener listener) {
             super( itemView );
 
             ivItemWelcome = itemView.findViewById( R.id.iv_items_welcome );
@@ -106,12 +103,8 @@ public class ItemWelcomeAdapter extends RecyclerView.Adapter<ItemWelcomeAdapter.
             ivBtnOrder.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listener != null){
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION){
-                            listener.onItemClick(position);
-                        }
-                    }
+                    Intent intentLogin = new Intent( context, LoginActivity.class );
+                    context.startActivity( intentLogin );
                 }
             });
         }
