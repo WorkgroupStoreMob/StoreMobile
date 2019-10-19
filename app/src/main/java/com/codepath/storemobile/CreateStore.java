@@ -28,14 +28,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import models.Store;
 
@@ -66,6 +69,7 @@ public class CreateStore extends AppCompatActivity {
     String momo;
     String store_Name;
     Intent intent;
+    boolean VerifyStoreNameBoolean = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,25 +99,24 @@ public class CreateStore extends AppCompatActivity {
         btnSave.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                store_Name = storename.getText().toString();
-//                store_Name = store_Name.replaceAll("\\s+", "");
-                String store_Description = storeDescription.getText().toString();
-                String store_Password = storePassword.getText().toString();
-                String store_Password_Confirm = storePasswordConfirmation.getText().toString();
-                String store_Email = storeEmail.getText().toString();
-                String store_Phone = storePhone.getText().toString();
 
-                // If category is empty returns a toast message
-                if(store_Name.isEmpty() || store_Description.isEmpty() || store_Password.isEmpty() || store_Password_Confirm.isEmpty()
-                        ||store_Email.isEmpty() || store_Phone.isEmpty()){
-                    Toast.makeText(CreateStore.this, "All the fields are required!", Toast.LENGTH_LONG).show();
-                    return;
-                }
+                    String store_Description = storeDescription.getText().toString();
+                    String store_Password = storePassword.getText().toString();
+                    String store_Password_Confirm = storePasswordConfirmation.getText().toString();
+                    String store_Email = storeEmail.getText().toString();
+                    String store_Phone = storePhone.getText().toString();
 
-                saveStores(store_Name, store_Description, store_Password, store_Email, store_Phone, photoFile, photoFileGalerry );
-                Toast.makeText(CreateStore.this, "Store successfully saved! ", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent( CreateStore.this, ManageStoreActivity.class );
-                startActivity( intent );
+                    // If category is empty returns a toast message
+                    if(store_Name.isEmpty() || store_Description.isEmpty() || store_Password.isEmpty() || store_Password_Confirm.isEmpty()
+                            ||store_Email.isEmpty() || store_Phone.isEmpty()){
+                        Toast.makeText(CreateStore.this, "All the fields are required!", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+
+                    saveStores(store_Name, store_Description, store_Password, store_Email, store_Phone, photoFile, photoFileGalerry );
+                    Toast.makeText(CreateStore.this, "Store successfully saved! ", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent( CreateStore.this, ManageStoreActivity.class );
+                    startActivity( intent );
             }
         } );
     }
@@ -379,4 +382,32 @@ public class CreateStore extends AppCompatActivity {
             }
         });
     }
+
+    public void  VerifyStoreName(final String name){
+        ParseQuery<Store> query = new ParseQuery<Store>( Store.class );
+        query.include( Store.KEY_NAME );
+        query.findInBackground( new FindCallback<Store>() {
+
+            @Override
+            public void done(List<Store> objects, ParseException e) {
+
+                if (e != null) {
+                    Log.e( TAG, "Error with query: "+e.getMessage() );
+                    e.printStackTrace();
+                    return;
+                }
+
+                for (int i = 0; i < objects.size(); i++) {
+                    if (name.equals(objects.get(i).getName()) ){
+                        VerifyStoreNameBoolean = true;
+                    }
+                }
+
+            }
+
+        } );
+    }
+
+
+
 }

@@ -7,9 +7,23 @@
     android:background="@color/colorDarkLightBlue"
     tools:context=".ItemActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        android:background="?attr/colorPrimary"
+        android:fitsSystemWindows="true"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/AppTheme">
+
+    </android.support.v7.widget.Toolbar>
 
     <ImageView
         android:id="@+id/iv_logo2"
+        android:layout_below="@+id/toolbarItem"
+        android:layout_centerHorizontal="true"
         android:layout_width="117dp"
         android:layout_height="85dp"
         android:layout_marginTop="15dp"
@@ -58,6 +72,17 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
         android:text="@string/back_to_store_list" />
+
+    <TextView
+        android:id="@+id/tv_incrementCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="22dp"
+        android:text="0"
+        android:textColor="@android:color/background_light" />
 
 
 </RelativeLayout>

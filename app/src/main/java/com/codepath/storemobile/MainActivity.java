@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void done(List<Store> store, ParseException e) {
                 if(e != null){
-                    Log.e(TAG, "Error with query");
+                    Log.e(TAG, "Error with queryyyy");
                     e.printStackTrace();
                     return;
                 }

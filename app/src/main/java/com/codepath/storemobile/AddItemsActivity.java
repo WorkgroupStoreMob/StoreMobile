@@ -1,12 +1,18 @@
 package com.codepath.storemobile;
 
+import android.content.ContentUris;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
@@ -26,15 +32,23 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import org.parceler.Parcels;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.text.NumberFormat;
 import java.util.Calendar;
 
 import models.Items;
 import models.Store;
+
+import static com.codepath.storemobile.CreateStore.isDownloadsDocument;
+import static com.codepath.storemobile.CreateStore.isExternalStorageDocument;
+import static com.codepath.storemobile.CreateStore.isGooglePhotosUri;
+import static com.codepath.storemobile.CreateStore.isMediaDocument;
 
 public class AddItemsActivity extends AppCompatActivity {
 
@@ -58,6 +72,9 @@ public class AddItemsActivity extends AppCompatActivity {
 
     private Button btnAddImage;
     private Button btnSave;
+    String momo;
+    Intent intent;
+    String nameStore;
 
 
 
@@ -66,6 +83,7 @@ public class AddItemsActivity extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_add_items );
 
+        nameStore = getIntent().getStringExtra("nameStore");
         image_item = findViewById( R.id.iv_image_product );
         etcategory = findViewById( R.id.et_item_category );
         etprice = findViewById( R.id.et_item_selling_price );
@@ -108,7 +126,7 @@ public class AddItemsActivity extends AppCompatActivity {
 //                    Toast.makeText( AddItemsActivity.this, "There is no photo", Toast.LENGTH_SHORT ).show();
 //                    return;
 //                }
-                saveItems( description, buyingPrice, price, category, photoFile, photoFileGalerry );
+                saveItems( description, buyingPrice, price, category, photoFile, photoFileGalerry, nameStore );
             }
         } );
     }
@@ -138,13 +156,8 @@ public class AddItemsActivity extends AppCompatActivity {
 
     private void choosePhotoFromGallary() {
         // Create intent for picking a photo from the gallery
-        Intent intent = new Intent( Intent.ACTION_PICK,
+         intent = new Intent( Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI );
-        photoFileGalerry = getPhotoFileUri(photoFileName);
-
-        Uri fileProvider = FileProvider.getUriForFile(this, "com.codepath.storemobile.fileprovider", photoFileGalerry);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
-
 
         // If you call startActivityForResult() using an intent that no app can handle, your app will crash.
         // So as long as the result is not null, it's safe to use the intent.
@@ -186,11 +199,24 @@ public class AddItemsActivity extends AppCompatActivity {
             } else { // Result was a failure
                 Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
-        } else if (requestCode == PICK_PHOTO_CODE){
+        }
+
+        if (requestCode == PICK_PHOTO_CODE){
             if (data != null) {
                 Uri photoUri = data.getData();
                 // Do something with the photo based on Uri
                 Bitmap selectedImage = null;
+                try {
+                    momo = getFilePath(this, photoUri);
+                    photoFile = null;
+
+                    photoFileGalerry = getPhotoFileUri(momo.substring(momo.lastIndexOf('/')+1));
+                    Uri fileProvider = FileProvider.getUriForFile(this, "com.codepath.storemobile.fileprovider", photoFileGalerry);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
+
                 try {
                     selectedImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoUri);
                     String absolutePath = photoFileGalerry.getAbsolutePath();
@@ -224,16 +250,23 @@ public class AddItemsActivity extends AppCompatActivity {
 
 
         private void saveItems ( final String description,
-                String buyingPrice, String price, String category, File photoFile, File photoFileGalerry){
+                String buyingPrice, String price, String category, File photoFile, File photoFileGalerry, String store_name){
 
             Items items = new Items();
             items.setDescriptionSotre( description );
             items.setBuyingPrice( buyingPrice );
             items.setCategory( category );
             items.setPrice( price );
+            items.setPrice( price );
+            items.setStoreName( store_name );
            // items.setQuantity( quantity );
             if(photoFileGalerry != null){
-                items.setImageStore( new ParseFile(photoFileGalerry ) );
+                Bitmap bitmap = ((BitmapDrawable)image_item.getDrawable()).getBitmap();
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                // Compress image to lower quality scale 1 - 100
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] image = stream.toByteArray();
+                items.setImageStore( new ParseFile(momo.substring(momo.lastIndexOf('/')+1), image, "image/*" ) );
             } else{
                 items.setImageStore( new ParseFile( photoFile) );
             }
@@ -263,5 +296,62 @@ public class AddItemsActivity extends AppCompatActivity {
             } );
         }
 
+
+    public static String getFilePath(Context context, Uri uri) throws URISyntaxException {
+        String selection = null;
+        String[] selectionArgs = null;
+        // Uri is different in versions after KITKAT (Android 4.4), we need to
+        if (Build.VERSION.SDK_INT >= 19 && DocumentsContract.isDocumentUri(context.getApplicationContext(), uri)) {
+            if (isExternalStorageDocument(uri)) {
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                return Environment.getExternalStorageDirectory() + "/" + split[1];
+            } else if (isDownloadsDocument(uri)) {
+                final String id = DocumentsContract.getDocumentId(uri);
+                uri = ContentUris.withAppendedId(
+                        Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+            } else if (isMediaDocument(uri)) {
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                final String type = split[0];
+                if ("image".equals(type)) {
+                    uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                } else if ("video".equals(type)) {
+                    uri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+                } else if ("audio".equals(type)) {
+                    uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                }
+                selection = "_id=?";
+                selectionArgs = new String[]{
+                        split[1]
+                };
+            }
+        }
+        if ("content".equalsIgnoreCase(uri.getScheme())) {
+
+
+            if (isGooglePhotosUri(uri)) {
+                return uri.getLastPathSegment();
+            }
+
+            String[] projection = {
+                    MediaStore.Images.Media.DATA
+            };
+            Cursor cursor = null;
+            try {
+                cursor = context.getContentResolver()
+                        .query(uri, projection, selection, selectionArgs, null);
+                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                if (cursor.moveToFirst()) {
+                    return cursor.getString(column_index);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if ("file".equalsIgnoreCase(uri.getScheme())) {
+            return uri.getPath();
+        }
+        return null;
+    }
     }
 
