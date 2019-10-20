@@ -360,10 +360,10 @@ public class CreateStore extends AppCompatActivity {
             // ...
             @Override
             public void onTextChanged(CharSequence text, int start, int count, int after) {
-                store_Name = storename.getText().toString();
+                store_Name = storeName.getText().toString();
                 store_Name = store_Name.replaceAll("\\s+", "");
                 if (!(text.toString().equals(store_Name.replaceAll("\\s+", "")))){
-                    storename.setText(store_Name);
+                    storeName.setText(store_Name);
                 }
 
                 if (text.length() > 0 && text.length() <= 2) {

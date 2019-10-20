@@ -46,7 +46,7 @@
             android:layout_gravity="center"
             android:hint="@string/store_name" />
 </android.support.design.widget.TextInputLayout>
-
+<EditText
         android:id="@+id/et_store_password"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
