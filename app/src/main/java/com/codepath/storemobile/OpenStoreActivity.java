@@ -14,11 +14,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
+
 import org.parceler.Parcels;
+
 
 import java.util.List;
 
@@ -33,6 +36,7 @@ public class OpenStoreActivity extends AppCompatActivity {
 
     TextView tvBusinessName;
     ImageView ivLogoBusiness;
+
     ProgressBar pbLoading;
     boolean login = false;
 
@@ -53,6 +57,7 @@ public class OpenStoreActivity extends AppCompatActivity {
 
         tvBusinessName = findViewById( R.id.tvBusinessName );
         ivLogoBusiness = findViewById( R.id.ivLogoBusiness );
+
         pbLoading = findViewById( R.id.pbLoading );
 
 
@@ -122,6 +127,7 @@ public class OpenStoreActivity extends AppCompatActivity {
                             pbLoading.setVisibility(View.GONE);
                         }
                         login = false;
+
                     }
 
                 } );

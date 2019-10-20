@@ -35,6 +35,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     }
 
     public void SetOnItemClickListener(ItemAdapter.OnItemClickListener listener){
+
         monOnItemClickListener = listener;
     }
 
@@ -67,6 +68,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         private TextView tv_category;
 
         private ImageButton ivBtnOrder1;
+
 
         public ViewHolder(@NonNull View itemView, final ItemAdapter.OnItemClickListener listener) {
             super(itemView);

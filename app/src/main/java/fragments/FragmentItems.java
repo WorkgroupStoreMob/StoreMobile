@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
 import android.widget.Toast;
+
 
 import com.codepath.storemobile.AddItemsActivity;
 import com.codepath.storemobile.R;
@@ -31,6 +33,7 @@ public class FragmentItems extends Fragment {
     String storeName;
 
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,6 +48,7 @@ public class FragmentItems extends Fragment {
 
 
                 storeName = getArguments().getString("storeName");
+
                 btnAddImage.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {

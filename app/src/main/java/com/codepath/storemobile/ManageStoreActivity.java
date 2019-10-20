@@ -34,6 +34,7 @@ public class ManageStoreActivity extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_manage_store );
 
+
         //rvNameStore = findViewById( R.id.rvNameStore );
         tvBusinessName = findViewById( R.id.tvBusinessName );
         storeData = new ArrayList<>( );
@@ -42,6 +43,7 @@ public class ManageStoreActivity extends AppCompatActivity {
             tvBusinessName.setText(""+storeData.get(i).getName());
         }
         
+
         final FragmentManager fragmentManager = getSupportFragmentManager();
 
         bottomNavigationView = findViewById( R.id.bottom_navigation );
