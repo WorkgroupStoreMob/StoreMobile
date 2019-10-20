@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.codepath.storemobile.AddItemsActivity;
 import com.codepath.storemobile.R;
@@ -25,6 +26,8 @@ public class FragmentItems extends Fragment {
 
     private Button btnAddImage;
 
+    private TextView tvStoreName;
+
 
 
     @Nullable
@@ -39,7 +42,9 @@ public class FragmentItems extends Fragment {
 
         btnAddImage = view.findViewById( R.id.btnAddItems);
 
-        btnAddImage.setOnClickListener( new View.OnClickListener() {
+
+
+                btnAddImage.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent( getContext(), AddItemsActivity.class );

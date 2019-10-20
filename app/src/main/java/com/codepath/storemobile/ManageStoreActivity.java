@@ -1,14 +1,15 @@
 package com.codepath.storemobile;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 
+import adapters.StoreAdapter;
 import fragments.FragmentClient;
 import fragments.FragmentCommande;
 import fragments.FragmentItems;
@@ -16,11 +17,16 @@ import fragments.FragmentItems;
 public class ManageStoreActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
+    private RecyclerView rvNameStore;
+    private StoreAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_manage_store );
+
+        ///rvNameStore = findViewById( R.id.rvNameStore );
+
 
 
         final FragmentManager fragmentManager = getSupportFragmentManager();

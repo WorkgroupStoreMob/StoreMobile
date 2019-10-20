@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,17 +22,27 @@ import models.Items;
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     private Context context;
     private List<Items> itemsList;
+    private ItemWelcomeAdapter.OnItemClickListener monOnItemClickListener;
 
     public ItemAdapter(Context context, List<Items> itemsList) {
         this.context = context;
         this.itemsList = itemsList;
+
+
+    }
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
+
+    public void SetOnItemClickListener(ItemWelcomeAdapter.OnItemClickListener listener){
+        monOnItemClickListener = listener;
     }
 
     @NonNull
     @Override
     public ItemAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from( context ).inflate( R.layout.item_list, viewGroup, false );
-        return new ItemAdapter.ViewHolder( view );
+        return new ItemAdapter.ViewHolder( view, monOnItemClickListener );
     }
 
     @Override
@@ -55,12 +66,27 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         private TextView tv_Price;
         private TextView tv_category;
 
-        public ViewHolder(@NonNull View itemView) {
+        private ImageButton ivBtnOrder1;
+
+        public ViewHolder(@NonNull View itemView, final ItemWelcomeAdapter.OnItemClickListener listener) {
             super(itemView);
             ivItem_image = itemView.findViewById( R.id.ivItem_image );
             tv_Desc = itemView.findViewById( R.id.tv_Desc );
             tv_Price = itemView.findViewById( R.id.tv_Price );
             tv_category = itemView.findViewById( R.id.tv_category );
+            ivBtnOrder1 = itemView.findViewById( R.id.iv_btn_order1 );
+
+            ivBtnOrder1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null){
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION){
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
 
         public void bind(Items items) throws ParseException {
