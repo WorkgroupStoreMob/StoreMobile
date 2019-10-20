@@ -56,6 +56,7 @@ public class ItemWelcomeActivity extends AppCompatActivity {
     TextView tv_incrementCart;
     MenuItem menuItemCart;
     int globalPosition;
+    String qte;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,11 +123,22 @@ public class ItemWelcomeActivity extends AppCompatActivity {
                 total = String.valueOf(Double.parseDouble(price) * Double.parseDouble(txt_counter.getNumber()));
                 tv_AllPrice.setText("$"+total);
 
+                for(int i = 0; i < litemsCart.size(); i++){
+                    if (String.valueOf(litemsCart.get(i).getCategory()).equals(category)){
+                        if (litemsCart.get(i).getQte() != null){
+                            txt_counter.setNumber(""+Integer.parseInt(litemsCart.get(i).getQte()));
+                            tv_AllPrice.setText("$"+String.valueOf(Double.parseDouble(price) * Double.parseDouble(litemsCart.get(i).getQte())));
+                        }
+                        break;
+                    }
+                }
+
                 txt_counter.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
                     @Override
                     public void onValueChange(ElegantNumberButton view, int oldValue, int newValue) {
                         if (Integer.parseInt(txt_counter.getNumber()) >= 1){
-                            total = String.valueOf(Double.parseDouble(price) * Double.parseDouble(txt_counter.getNumber()));
+                            qte = txt_counter.getNumber();
+                            total = String.valueOf(Double.parseDouble(price) * Double.parseDouble(qte));
                             tv_AllPrice.setText("$"+total);
                         }
                     }
@@ -135,8 +147,21 @@ public class ItemWelcomeActivity extends AppCompatActivity {
                 bt_addToCard.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ItemCart itemCart = new ItemCart(category, price, total, String.valueOf(txt_counter.getNumber()), image);
-                        litemsCart.add(itemCart);
+                        ItemCart itemCart = new ItemCart(category, price, total, String.valueOf(qte), image);
+
+                        if (litemsCart.size() == 0){
+                            Toast.makeText(ItemWelcomeActivity.this, " size= 0", Toast.LENGTH_SHORT).show();
+                            litemsCart.add(itemCart);
+                        }else{
+                            for(int i = 0; i < litemsCart.size(); i++){
+                                if (String.valueOf(litemsCart.get(i).getCategory()).equals(category)){
+                                    itemCart = new ItemCart(category, price, total, String.valueOf(qte), image);
+                                    litemsCart.remove(i);
+                                    break;
+                                }
+                            }
+                            litemsCart.add(itemCart);
+                        }
                         incrementCounter();
                         showAddToCart.dismiss();
                     }

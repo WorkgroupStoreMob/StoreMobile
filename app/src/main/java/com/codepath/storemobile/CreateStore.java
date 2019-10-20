@@ -1,17 +1,26 @@
 package com.codepath.storemobile;
 
+import android.content.ContentUris;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,8 +32,10 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.SaveCallback;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import models.Store;
 
@@ -33,6 +44,7 @@ public class CreateStore extends AppCompatActivity {
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1035;
     public final static int PICK_PHOTO_CODE = 1047;
     public String photoFileName = "photo.jpg";
+    public String photoFileNameGallery = "download.jpeg";
     private File photoFile;
     private File photoFileGalerry;
 
@@ -50,8 +62,10 @@ public class CreateStore extends AppCompatActivity {
 
     private Button btnAddLogo;
     private Button btnSave;
-
-
+    String ab;
+    String momo;
+    String store_Name;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +83,8 @@ public class CreateStore extends AppCompatActivity {
         btnAddLogo = findViewById( R.id.btn_add_logo );
         btnSave = findViewById( R.id.btn_save_store );
 
+        setupFloatingLabelError();
+
         btnAddLogo.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +95,9 @@ public class CreateStore extends AppCompatActivity {
         btnSave.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+//                store_Name = storename.getText().toString();
+//                store_Name = store_Name.replaceAll("\\s+", "");
                 String store_Name = storeName.getText().toString();
                 String store_Description = storeDescription.getText().toString();
                 String store_Password = storePassword.getText().toString();
@@ -95,6 +114,9 @@ public class CreateStore extends AppCompatActivity {
                     return;
                 }
 
+                saveStores(store_Name, store_Description, store_Password, store_Email, store_Phone, photoFile, photoFileGalerry );
+                Toast.makeText(CreateStore.this, "Store successfully saved! ", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent( CreateStore.this, ManageStoreActivity.class );
 
                 // String storename = store.getName();
 
@@ -130,6 +152,7 @@ public class CreateStore extends AppCompatActivity {
         } );
     }
 
+    // Method showPictureDialog()
     // Method for choose type of picture entry
     private void showPictureDialog() {
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder( this );
@@ -154,24 +177,89 @@ public class CreateStore extends AppCompatActivity {
         pictureDialog.show();
     }
 
-
     private void choosePhotoFromGallary() {
         // Create intent for picking a photo from the gallery
-        Intent intent = new Intent( Intent.ACTION_PICK,
+         intent = new Intent( Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI );
-        photoFileGalerry = getPhotoFileUri(photoFileName);
-
-        Uri fileProvider = FileProvider.getUriForFile(this, "com.codepath.storemobile.fileprovider", photoFileGalerry);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
-
-
-        // If you call startActivityForResult() using an intent that no app can handle, your app will crash.
-        // So as long as the result is not null, it's safe to use the intent.
+//        // If you call startActivityForResult() using an intent that no app can handle, your app will crash.
+//        // So as long as the result is not null, it's safe to use the intent.
         if (intent.resolveActivity( getPackageManager() ) != null) {
             // Bring up gallery to select a photo
             startActivityForResult( intent, PICK_PHOTO_CODE );
-
         }
+    }
+
+    public static String getFilePath(Context context, Uri uri) throws URISyntaxException {
+        String selection = null;
+        String[] selectionArgs = null;
+        // Uri is different in versions after KITKAT (Android 4.4), we need to
+        if (Build.VERSION.SDK_INT >= 19 && DocumentsContract.isDocumentUri(context.getApplicationContext(), uri)) {
+            if (isExternalStorageDocument(uri)) {
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                return Environment.getExternalStorageDirectory() + "/" + split[1];
+            } else if (isDownloadsDocument(uri)) {
+                final String id = DocumentsContract.getDocumentId(uri);
+                uri = ContentUris.withAppendedId(
+                        Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+            } else if (isMediaDocument(uri)) {
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                final String type = split[0];
+                if ("image".equals(type)) {
+                    uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                } else if ("video".equals(type)) {
+                    uri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+                } else if ("audio".equals(type)) {
+                    uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                }
+                selection = "_id=?";
+                selectionArgs = new String[]{
+                        split[1]
+                };
+            }
+        }
+        if ("content".equalsIgnoreCase(uri.getScheme())) {
+
+
+            if (isGooglePhotosUri(uri)) {
+                return uri.getLastPathSegment();
+            }
+
+            String[] projection = {
+                    MediaStore.Images.Media.DATA
+            };
+            Cursor cursor = null;
+            try {
+                cursor = context.getContentResolver()
+                        .query(uri, projection, selection, selectionArgs, null);
+                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                if (cursor.moveToFirst()) {
+                    return cursor.getString(column_index);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if ("file".equalsIgnoreCase(uri.getScheme())) {
+            return uri.getPath();
+        }
+        return null;
+    }
+
+    public static boolean isExternalStorageDocument(Uri uri) {
+        return "com.android.externalstorage.documents".equals(uri.getAuthority());
+    }
+
+    public static boolean isDownloadsDocument(Uri uri) {
+        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
+    }
+
+    public static boolean isMediaDocument(Uri uri) {
+        return "com.android.providers.media.documents".equals(uri.getAuthority());
+    }
+
+    public static boolean isGooglePhotosUri(Uri uri) {
+        return "com.google.android.apps.photos.content".equals(uri.getAuthority());
     }
 
 
@@ -183,7 +271,7 @@ public class CreateStore extends AppCompatActivity {
         // wrap File object into a content provider
         // required for API >= 24
         // See https://guides.codepath.com/android/Sharing-Content-with-Intents#sharing-files-with-api-24-or-higher
-        Uri fileProvider = FileProvider.getUriForFile(this, "com.codepath.storemobile.fileprovider", photoFile);
+        Uri fileProvider = FileProvider.getUriForFile(CreateStore.this, "com.codepath.storemobile.fileprovider", photoFile);
         i.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
 
         // If you call startActivityForResult() using an intent that no app can handle, your app will crash.
@@ -207,11 +295,24 @@ public class CreateStore extends AppCompatActivity {
             } else { // Result was a failure
                 Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
-        } else if (requestCode == PICK_PHOTO_CODE){
+        }
+
+        if (requestCode == PICK_PHOTO_CODE){
             if (data != null) {
                 Uri photoUri = data.getData();
                 // Do something with the photo based on Uri
                 Bitmap selectedImage = null;
+                try {
+                    momo = getFilePath(this, photoUri);
+                    photoFile = null;
+
+                    photoFileGalerry = getPhotoFileUri(momo.substring(momo.lastIndexOf('/')+1));
+                    Uri fileProvider = FileProvider.getUriForFile(CreateStore.this, "com.codepath.storemobile.fileprovider", photoFileGalerry);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
+
                 try {
                     selectedImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoUri);
                     String absolutePath = photoFileGalerry.getAbsolutePath();
@@ -222,10 +323,7 @@ public class CreateStore extends AppCompatActivity {
                 logoStore.setImageBitmap(selectedImage);
             }
         }
-
     }
-
-
 
     // Returns the File for a photo stored on disk given the fileName
     public File getPhotoFileUri(String fileName) {
@@ -245,31 +343,31 @@ public class CreateStore extends AppCompatActivity {
         return file;
     }
 
-
-
-    private void saveStores (final String description, String name,
+    private void saveStores (String name, final String description,
                              String password, String email, String phone, File photoFile, File photoFileGalerry){
+        Store stores = new Store();
+        if(photoFile != null){
+            stores.setImage( new ParseFile( photoFile) );
+        } else{
+            Bitmap bitmap = ((BitmapDrawable)logoStore.getDrawable()).getBitmap();
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            // Compress image to lower quality scale 1 - 100
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            byte[] image = stream.toByteArray();
+            stores.setImage( new ParseFile( momo.substring(momo.lastIndexOf('/')+1), image, "image/*" ) );
+        }
 
-         Store stores = new Store();
         stores.setDescription( description );
         stores.setName( name );
         stores.setPassword( password );
         stores.setEmail( email );
         stores.setPhone( phone );
-        if(photoFileGalerry != null){
-            stores.setImage( new ParseFile(photoFileGalerry ) );
-        } else{
-            stores.setImage( new ParseFile( photoFile) );
-        }
-
-
-        //items.setStore( store );
 
         stores.saveInBackground( new SaveCallback() {
             @Override
             public void done(ParseException e) {
                 if (e != null) {
-                    Log.e( TAG, "Error while saving" );
+                    Log.e( TAG, "Error while saving: "+e.getMessage() );
                     e.printStackTrace();
                     return;
                 }
@@ -280,9 +378,40 @@ public class CreateStore extends AppCompatActivity {
                 storeName.setText( "" );
                 storeEmail.setText( "" );
                 storePhone.setText( "" );
-                // etquantity.setText( "" );
                 logoStore.setImageResource( 0 );
             }
         } );
+    }
+
+    private void setupFloatingLabelError() {
+        final TextInputLayout floatingUsernameLabel = (TextInputLayout) findViewById(R.id.store_name_text_input_layout);
+        floatingUsernameLabel.getEditText().addTextChangedListener(new TextWatcher() {
+            // ...
+            @Override
+            public void onTextChanged(CharSequence text, int start, int count, int after) {
+                store_Name = storename.getText().toString();
+                store_Name = store_Name.replaceAll("\\s+", "");
+                if (!(text.toString().equals(store_Name.replaceAll("\\s+", "")))){
+                    storename.setText(store_Name);
+                }
+
+                if (text.length() > 0 && text.length() <= 2) {
+                    floatingUsernameLabel.setError("Avoid Putting Space");
+                    floatingUsernameLabel.setErrorEnabled(true);
+                } else {
+                    floatingUsernameLabel.setErrorEnabled(false);
+                }
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 }
