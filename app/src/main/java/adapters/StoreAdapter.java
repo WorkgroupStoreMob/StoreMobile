@@ -55,6 +55,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent( context, ItemActivity.class );
+                intent.putExtra("nameStore", store.getName());
                 context.startActivity( intent );
             }
         } );

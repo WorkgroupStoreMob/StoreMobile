@@ -22,7 +22,7 @@ import models.Items;
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     private Context context;
     private List<Items> itemsList;
-    private ItemWelcomeAdapter.OnItemClickListener monOnItemClickListener;
+    private ItemAdapter.OnItemClickListener monOnItemClickListener;
 
     public ItemAdapter(Context context, List<Items> itemsList) {
         this.context = context;
@@ -34,7 +34,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         void onItemClick(int position);
     }
 
-    public void SetOnItemClickListener(ItemWelcomeAdapter.OnItemClickListener listener){
+    public void SetOnItemClickListener(ItemAdapter.OnItemClickListener listener){
+
         monOnItemClickListener = listener;
     }
 
@@ -68,7 +69,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
         private ImageButton ivBtnOrder1;
 
-        public ViewHolder(@NonNull View itemView, final ItemWelcomeAdapter.OnItemClickListener listener) {
+
+        public ViewHolder(@NonNull View itemView, final ItemAdapter.OnItemClickListener listener) {
             super(itemView);
             ivItem_image = itemView.findViewById( R.id.ivItem_image );
             tv_Desc = itemView.findViewById( R.id.tv_Desc );
@@ -95,7 +97,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                 Glide.with( context ).load( image.getFile()).into( ivItem_image );
             }
             tv_Desc.setText( items.getDescriptionStore() );
-            tv_Price.setText( items.getPrice() );
+            tv_Price.setText( "$"+items.getPrice() );
             tv_category.setText( items.getCategory() );
         }
     }

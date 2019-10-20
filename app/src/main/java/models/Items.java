@@ -13,8 +13,17 @@ public class Items extends ParseObject {
     public static final String KEY_BUYING_PRICE = "buying_price";
     public static final String KEY_CATEGORY = "category_product";
     public static final String KEY_STORE = "store";
+    public static final String KEY_STORE_NAME = "store_name";
     public static final String KEY_QUANTITY = "qty_product";
 
+    public String getStoreName(){
+
+        return getString( KEY_STORE_NAME );
+    }
+
+    public  void setStoreName (String store_name){
+        put(KEY_STORE_NAME, store_name);
+    }
 
     public String getDescriptionStore(){
 

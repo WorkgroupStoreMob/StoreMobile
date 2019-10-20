@@ -10,11 +10,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+
+
+import org.parceler.Parcels;
+
 
 import java.util.List;
 
@@ -29,6 +36,9 @@ public class OpenStoreActivity extends AppCompatActivity {
 
     TextView tvBusinessName;
     ImageView ivLogoBusiness;
+
+    ProgressBar pbLoading;
+    boolean login = false;
 
 
     private static final String TAG = "OpenStoreActivity";
@@ -48,12 +58,14 @@ public class OpenStoreActivity extends AppCompatActivity {
         tvBusinessName = findViewById( R.id.tvBusinessName );
         ivLogoBusiness = findViewById( R.id.ivLogoBusiness );
 
+        pbLoading = findViewById( R.id.pbLoading );
+
 
 
         btnLoginOpenStore.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                pbLoading.setVisibility(View.VISIBLE);
                 ParseQuery<Store> query = new ParseQuery<Store>( Store.class );
                 query.include( Store.KEY_NAME );
                 query.include( Store.KEY_IMAGE );
@@ -65,32 +77,57 @@ public class OpenStoreActivity extends AppCompatActivity {
                     public void done(List<Store> objects, ParseException e) {
 
                         if (e != null) {
-                            Log.e( TAG, "Error with query" );
+                            Log.e( TAG, "Error with query Open Store: "+e.getMessage() );
                             e.printStackTrace();
+                            pbLoading.setVisibility(View.GONE);
                             return;
                         }
 
                         for (int i = 0; i < objects.size(); i++) {
-
-                            if (storeName.equals(objects.get(i).getName()) || storePassword.equals(objects.get(i).getKeyPassword()) ){
+                            if (storeName.equals(objects.get(i).getName()) && storePassword.equals(objects.get(i).getKeyPassword()) ){
+                                login = true;
                                 Intent intent = new Intent( OpenStoreActivity.this, ManageStoreActivity.class );
+                                intent.putExtra("StoreData", Parcels.wrap(objects));
                                 startActivity( intent );
-                                break;
-                            } else {
-                                AlertDialog.Builder builder = new AlertDialog.Builder( OpenStoreActivity.this);
-                                builder.setTitle( "Store Login Error" );
-                                builder.setMessage( "username or password incorrect");
-                                builder.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.cancel();
-                                    }
-                                } );
-                                builder.show();
+                                pbLoading.setVisibility(View.GONE);
                                 break;
                             }
 
+//                            if ((i + 1 == objects.size()) && storeName.equals(objects.get(i).getName()) || storePassword.equals(objects.get(i).getKeyPassword())){
+//                                AlertDialog.Builder builder = new AlertDialog.Builder( OpenStoreActivity.this);
+//                                pbLoading.setVisibility(View.GONE);
+//                                builder.setTitle( "Store Login Error" );
+//                                builder.setMessage( "username or password incorrect");
+//                                builder.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                        dialog.cancel();
+//                                        pbLoading.setVisibility(View.GONE);
+//                                    }
+//                                } );
+//                                builder.show();
+//                                pbLoading.setVisibility(View.GONE);
+//                                break;
+//                            }
+
                         }
+                        if (login == false){
+                            AlertDialog.Builder builder = new AlertDialog.Builder( OpenStoreActivity.this);
+                            pbLoading.setVisibility(View.GONE);
+                            builder.setTitle( "Store Login Error" );
+                            builder.setMessage( "username or password incorrect");
+                            builder.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                    pbLoading.setVisibility(View.GONE);
+                                }
+                            } );
+                            builder.show();
+                            pbLoading.setVisibility(View.GONE);
+                        }
+                        login = false;
+
                     }
 
                 } );

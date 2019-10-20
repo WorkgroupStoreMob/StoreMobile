@@ -8,26 +8,41 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import org.parceler.Parcels;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import adapters.StoreAdapter;
 import fragments.FragmentClient;
 import fragments.FragmentCommande;
 import fragments.FragmentItems;
+import models.Store;
 
 public class ManageStoreActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private RecyclerView rvNameStore;
     private StoreAdapter adapter;
+    TextView tvBusinessName;
+    List<Store> storeData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_manage_store );
 
-        ///rvNameStore = findViewById( R.id.rvNameStore );
 
-
+        //rvNameStore = findViewById( R.id.rvNameStore );
+        tvBusinessName = findViewById( R.id.tvBusinessName );
+        storeData = new ArrayList<>( );
+        storeData = Parcels.unwrap(getIntent().getParcelableExtra("StoreData"));
+        for (int i = 0; i < storeData.size(); i++){
+            tvBusinessName.setText(""+storeData.get(i).getName());
+        }
+        
 
         final FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -40,6 +55,9 @@ public class ManageStoreActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()){
                     case R.id.my_business:
                     fragment = new FragmentItems();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("storeName", tvBusinessName.getText().toString());
+                    fragment.setArguments(bundle);
                     break;
                     case R.id.home_order:
                         fragment = new FragmentCommande();
