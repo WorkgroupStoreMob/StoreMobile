@@ -9,6 +9,8 @@
     <color name="colorBlueLogo">#393185</color>
     <color name="colorGold">#FFD700</color>
     <color name="colorSilver">#C0C0C0</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBleuCanard">#689D71</color>
 
     <color name="colorPrimary1">#607D8B</color>
     <color name="colorPrimaryDark1">#455A64</color>

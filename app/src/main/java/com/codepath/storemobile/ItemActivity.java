@@ -53,15 +53,32 @@ public class ItemActivity extends AppCompatActivity {
     String qte;
 
     private RecyclerView rvItems;
+    private Button btnStoreList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_item );
 
+        //Back to Store List
+        btnStoreList = (Button) findViewById( R.id.btn_store_list );
+        btnStoreList.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentStoreList = new Intent( ItemActivity.this, StoreActivity.class );
+                startActivity( intentStoreList );
+            }
+        } );
+
+
+
+        //Add Toolbar
         toolbar = (Toolbar) findViewById(R.id.toolbarItem);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Items List");
+        getSupportActionBar().setLogo( R.drawable.logosmr);
+        getSupportActionBar().setTitle("  Items List");
+
+
         tv_incrementCart = findViewById( R.id.tv_incrementCart );
 
         rvItems = findViewById( R.id.rvItems);

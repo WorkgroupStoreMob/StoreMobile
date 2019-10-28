@@ -13,41 +13,21 @@
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp"
-        android:background="?attr/colorPrimary"
+        android:background="@color/colorWhite"
         android:fitsSystemWindows="true"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/AppTheme">
 
     </android.support.v7.widget.Toolbar>
 
-    <ImageView
-        android:id="@+id/iv_logo2"
-        android:layout_below="@+id/toolbarItem"
-        android:layout_centerHorizontal="true"
-        android:layout_width="117dp"
-        android:layout_height="85dp"
-        android:layout_marginTop="15dp"
-        android:contentDescription="@string/todo"
-        android:scaleType="centerCrop"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/tv_store_name2"
-        android:layout_width="188dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="15dp"
-        android:layout_toEndOf="@id/iv_logo2"
-        android:textSize="30sp"
-        tools:text="My Store" />
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvItems"
         android:background="@color/colorLightBlue"
-        android:layout_below="@id/iv_logo2"
+        android:layout_below="@id/toolbarItem"
         android:layout_above="@id/btn_open_store2"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

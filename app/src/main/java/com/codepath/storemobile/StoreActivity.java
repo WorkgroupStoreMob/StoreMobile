@@ -4,7 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.Button;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -24,16 +26,22 @@ public class StoreActivity extends AppCompatActivity {
     protected StoreAdapter adapter;
 
     private RecyclerView rvStore;
-
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_store );
 
+        //Add Toolbar
+        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbarItem3);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setLogo( R.drawable.logosmr);
+        getSupportActionBar().setTitle("  List of Store");
+
+
+
         rvStore = findViewById( R.id.rvStore);
-
-
 
         // create data source
         listStore = new ArrayList<>( );

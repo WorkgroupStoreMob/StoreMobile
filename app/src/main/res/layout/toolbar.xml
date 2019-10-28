@@ -9,7 +9,7 @@
     android:layout_alignParentTop="true"
     app:layout_editor_absoluteX="0dp"
     app:layout_editor_absoluteY="0dp"
-    android:background="?attr/colorPrimary"
+    android:background="@color/colorSilver"
     android:fitsSystemWindows="true"
     android:minHeight="?attr/actionBarSize"
     android:theme="@style/AppTheme">

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">StoreMobile</string>
     <string name="log_in">Log in</string>
-    <string name="my_store">My Store</string>
+    <string name="my_store">Open my own store</string>
     <string name="new_items">New Items</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="phone_number">Phone Number</string>
