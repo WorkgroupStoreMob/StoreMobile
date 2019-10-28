@@ -79,8 +79,8 @@ public class Items extends ParseObject {
         put(KEY_STORE, parseObject);
     }
 
-    public Number getQuantity(){
-        return getNumber( KEY_QUANTITY );
+    public String getQuantity(){
+        return getString( KEY_QUANTITY );
     }
 
     public void setQuantity(Number quantity){

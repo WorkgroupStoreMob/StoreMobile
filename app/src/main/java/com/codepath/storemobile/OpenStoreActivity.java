@@ -87,7 +87,8 @@ public class OpenStoreActivity extends AppCompatActivity {
                             if (storeName.equals(objects.get(i).getName()) && storePassword.equals(objects.get(i).getKeyPassword()) ){
                                 login = true;
                                 Intent intent = new Intent( OpenStoreActivity.this, ManageStoreActivity.class );
-                                intent.putExtra("StoreData", Parcels.wrap(objects));
+                                //intent.putExtra("StoreData", Parcels.wrap(objects));
+                                intent.putExtra("StoreData", storeName);
                                 startActivity( intent );
                                 pbLoading.setVisibility(View.GONE);
                                 break;

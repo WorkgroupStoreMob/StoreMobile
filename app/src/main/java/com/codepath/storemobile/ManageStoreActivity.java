@@ -1,5 +1,6 @@
 package com.codepath.storemobile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -8,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.parceler.Parcels;
@@ -29,20 +31,28 @@ public class ManageStoreActivity extends AppCompatActivity {
     TextView tvBusinessName;
     List<Store> storeData;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_manage_store );
 
 
+
         //rvNameStore = findViewById( R.id.rvNameStore );
         tvBusinessName = findViewById( R.id.tvBusinessName );
         storeData = new ArrayList<>( );
-        storeData = Parcels.unwrap(getIntent().getParcelableExtra("StoreData"));
-        for (int i = 0; i < storeData.size(); i++){
-            tvBusinessName.setText(""+storeData.get(i).getName());
-        }
-        
+
+
+
+        //storeData = Parcels.unwrap(getIntent().getParcelableExtra("StoreData"));
+        Intent in = getIntent();
+        String nameStore = in.getExtras().getString( "StoreData" );
+        tvBusinessName.setText( nameStore );
+//        for (int i = 0; i < storeData.size(); i++){
+//                tvBusinessName.setText("" + storeData.get( i ).getName() );
+//        }
+
 
         final FragmentManager fragmentManager = getSupportFragmentManager();
 
