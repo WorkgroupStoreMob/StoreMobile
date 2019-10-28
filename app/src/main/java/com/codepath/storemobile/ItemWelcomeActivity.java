@@ -63,9 +63,10 @@ public class ItemWelcomeActivity extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_item_welcome );
 
-        toolbar = (Toolbar) findViewById(R.id.toolbarItem);
+        toolbar = (Toolbar) findViewById(R.id.toolbarItem1);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Items List");
+        getSupportActionBar().setLogo( R.drawable.logosmr );
+        getSupportActionBar().setTitle("  Items List");
 
         btnStoreWelcomeItems = findViewById( R.id.btn_open_store1 );
         rvItems = findViewById( R.id.rvItems );

@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLogin;
     private Button btnOpenStore;
 
+    Toolbar toolbar;
+
     StoreWelcomeAdapter adapterWelcome;
     List<Store> lstore;
 
@@ -43,9 +45,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_main );
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle( "Bienvenue" );
-        actionBar.getTitle().toString();
+
+        //Add Toolbar
+        toolbar = (Toolbar) findViewById( R.id.toolbarItem2 );
+        setSupportActionBar( toolbar );
+        getSupportActionBar().setLogo( R.drawable.logosmr );
+        getSupportActionBar().setTitle( "  Welcome to SMob" );
+
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setTitle( "Bienvenue" );
+//        actionBar.getTitle().toString();
 
         btnLogin = findViewById( R.id.btnLogin );
         btnOpenStore = findViewById( R.id.btnOpenStoreWelcome );
