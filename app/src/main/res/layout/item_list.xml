@@ -39,6 +39,7 @@
                     android:textSize="20dp"
                     android:text="@string/category" />
 
+
                 <TextView
                     android:id="@+id/tv_Desc"
                     android:layout_width="277dp"
@@ -48,13 +49,18 @@
                     android:layout_weight="1"
                     android:text="Chaussure pour femme sdjdfjgfjj" />
 
-                <TextView
+
+
+                    <TextView
                     android:id="@+id/tv_Price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginLeft="5dp"
                     android:text="3500 gdes" />
+
+
+
             </LinearLayout>
 
             <android.support.v7.widget.AppCompatImageButton

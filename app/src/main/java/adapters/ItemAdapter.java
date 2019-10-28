@@ -67,6 +67,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         private TextView tv_Price;
         private TextView tv_category;
 
+
         private ImageButton ivBtnOrder1;
 
 
@@ -77,6 +78,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             tv_Price = itemView.findViewById( R.id.tv_Price );
             tv_category = itemView.findViewById( R.id.tv_category );
             ivBtnOrder1 = itemView.findViewById( R.id.iv_btn_order1 );
+
 
             ivBtnOrder1.setOnClickListener(new View.OnClickListener() {
                 @Override
