@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">StoreMobile</string>
-    <string name="log_in">Log in</string>
-    <string name="my_store">Open my own store</string>
+    <string name="log_in">Log In</string>
+    <string name="my_store">Create my own store</string>
     <string name="new_items">New Items</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="phone_number">Phone Number</string>
@@ -21,7 +21,7 @@
     <string name="forget_your_password">Forget your password</string>
     <string name="click_here">Click here</string>
     <string name="don_t_have_account">Don\'t have account?</string>
-    <string name="create_one">Create One</string>
+    <string name="create_one">Sign UP for free</string>
     <string name="open_my_store">Open my Store</string>
     <string name="name">Name</string>
     <string name="tvCounter">0</string>
