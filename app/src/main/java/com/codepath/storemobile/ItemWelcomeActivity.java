@@ -184,29 +184,29 @@ public class ItemWelcomeActivity extends AppCompatActivity {
         tv_incrementCart.setText(String.valueOf(litemsCart.size()));
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu, menu);
-        menuItemCart = menu.findItem(R.id.cart_counterMenu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.cart_counterMenu:
-                Intent intent = new Intent(ItemWelcomeActivity.this, CartActivity.class);
-                intent.putExtra("cartList", Parcels.wrap(litemsCart));
-                startActivity(intent);
-                return true;
-
-            default:
-
-                return super.onOptionsItemSelected(item);
-
-        }
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu, menu);
+//        menuItemCart = menu.findItem(R.id.cart_counterMenu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.cart_counterMenu:
+//                Intent intent = new Intent(ItemWelcomeActivity.this, CartActivity.class);
+//                intent.putExtra("cartList", Parcels.wrap(litemsCart));
+//                startActivity(intent);
+//                return true;
+//
+//            default:
+//
+//                return super.onOptionsItemSelected(item);
+//
+//        }
+//    }
 
     private void queryItems() {
 
