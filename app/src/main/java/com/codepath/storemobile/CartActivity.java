@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -37,12 +38,20 @@ public class CartActivity extends AppCompatActivity {
     TextView tv_total;
     TextView tv_subTotal;
 
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_cart);
 
+        //Add Toolbar
+        toolbar = (Toolbar) findViewById(R.id.toolbarItem6);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setLogo( R.drawable.logosmr);
         getSupportActionBar().setTitle("CART LIST");
+
+
 
         rvItems = findViewById( R.id.rvCarts );
         tv_total = findViewById(R.id.tv_total);
