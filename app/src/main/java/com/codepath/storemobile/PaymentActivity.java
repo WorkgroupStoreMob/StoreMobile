@@ -1,6 +1,7 @@
 package com.codepath.storemobile;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -46,7 +47,6 @@ public class PaymentActivity extends AppCompatActivity {
                     alertBuilder.setTitle("Confirm before purchase");
                     alertBuilder.setMessage("Card number: " + cardForm.getCardNumber() + "\n" +
                             "Card expiry date: " + cardForm.getExpirationDateEditText().getText().toString() + "\n" +
-                            "Card CVV: " + cardForm.getCvv() + "\n" +
                             "Postal code: " + cardForm.getPostalCode() + "\n" +
                             "Phone number: " + cardForm.getMobileNumber());
                     alertBuilder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
@@ -55,6 +55,7 @@ public class PaymentActivity extends AppCompatActivity {
                             //TODO: add payment process
                             dialogInterface.dismiss();
                             Toast.makeText(PaymentActivity.this, "Thank you for purchase", Toast.LENGTH_LONG).show();
+                            backToStoreList();
                         }
                     });
                     alertBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -72,5 +73,10 @@ public class PaymentActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void backToStoreList() {
+        Intent intent = new Intent( PaymentActivity.this, StoreActivity.class );
+        startActivity( intent );
     }
 }

@@ -36,7 +36,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:background="@drawable/cornerbutton1"
-        android:fontFamily="sans-serif-condensed-medium"
+        android:fontFamily="casual"
         android:text="@string/log_in"
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"
@@ -52,7 +52,11 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="22dp"
         android:background="@drawable/cornerbutton"
+        android:fontFamily="casual"
         android:text="@string/my_store"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>
