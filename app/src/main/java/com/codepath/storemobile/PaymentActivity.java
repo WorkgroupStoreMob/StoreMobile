@@ -7,15 +7,22 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.app.AlertDialog;
 
 import com.braintreepayments.cardform.view.CardForm;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import models.ItemCart;
 import models.Order;
 
 public class PaymentActivity extends AppCompatActivity {
@@ -26,14 +33,22 @@ public class PaymentActivity extends AppCompatActivity {
 
     Toolbar toolbar;
 
+    private static final String TAG = "PaymentActivity";
+
     private EditText nameOrder;
     private EditText emailOrder;
     private EditText phoneOrder;
 
-    ParseUser userOrder;
-    Order addUser;
+    private TextView tv_item_order;
+    private TextView tv_price_order;
+    private TextView tv_qty_order;
+
 
     private String nameUser, emailUser, phoneUser;
+    private String item1;
+    private Double total;
+    private String price;
+
 
 
 
@@ -52,11 +67,16 @@ public class PaymentActivity extends AppCompatActivity {
         getSupportActionBar().setLogo( R.drawable.logosmr);
         getSupportActionBar().setTitle("  Payment form");
 
-        //Add current user information to String variable
-        userOrder = new ParseUser();
-        nameUser =  userOrder.getString( "name" );
-        emailUser = userOrder.getEmail();
-        phoneUser = userOrder.getString( "phone" );
+        // add order information
+
+        tv_item_order = findViewById( R.id.tv_item_order);
+        tv_price_order = findViewById( R.id.tv_pr_order );
+        tv_qty_order = findViewById( R.id.tv_qty_order );
+
+        ItemCart item = new ItemCart( );
+        item1 = item.getCategory();
+
+        tv_item_order.setText( item1 );
 
         //Form user to save
 
@@ -64,15 +84,23 @@ public class PaymentActivity extends AppCompatActivity {
         emailOrder = (EditText) findViewById( R.id.et_email_order_process );
         phoneOrder = (EditText) findViewById( R.id.et_phone_order_process );
 
-        nameOrder.setText( nameUser );
-        emailOrder.setText( emailUser );
-        phoneOrder.setText( phoneUser );
+
+
+
 
         String nUser = nameOrder.getText().toString();
         String eUser = emailOrder.getText().toString();
         String pUser = phoneOrder.getText().toString();
 
+        //Add current user information to String variable
+        ParseUser userOrder = ParseUser.getCurrentUser();
+               emailUser = userOrder.getEmail();
+               nameUser = userOrder.getString( "name" );
+               phoneUser = userOrder.getString( "phone" );
 
+                nameOrder.setText(nameUser );
+                emailOrder.setText( emailUser );
+                phoneOrder.setText( phoneUser );
 
 
         cardForm = findViewById(R.id.card_form);

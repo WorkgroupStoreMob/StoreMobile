@@ -1,6 +1,5 @@
 package com.codepath.storemobile;
 
-import android.app.Application;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -12,16 +11,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import adapters.ItemCartAdapter;
-import adapters.ItemWelcomeAdapter;
 import models.ItemCart;
 import models.Items;
 
@@ -37,6 +33,7 @@ public class CartActivity extends AppCompatActivity {
     Double total = 0.0;
     TextView tv_total;
     TextView tv_subTotal;
+
 
     Toolbar toolbar;
 
@@ -91,6 +88,7 @@ public class CartActivity extends AppCompatActivity {
         litems = new ArrayList<>( );
         litems = Parcels.unwrap(getIntent().getParcelableExtra("cartList"));
         for (int i = 0; i < litems.size(); i++){
+
             try {
                 if (Double.parseDouble(litems.get(i).getTotal()) != 0.0){
                     total +=  Double.parseDouble(litems.get(i).getTotal());
@@ -102,6 +100,7 @@ public class CartActivity extends AppCompatActivity {
         }
         tv_total.setText("$"+total);
         tv_subTotal.setText("$"+total);
+
         // create adapter
         itemCartAdapter = new ItemCartAdapter(CartActivity.this,  litems );
 
@@ -122,5 +121,9 @@ public class CartActivity extends AppCompatActivity {
     private void cardPayment() {
         Intent intent = new Intent( CartActivity.this, PaymentActivity.class );
         startActivity( intent );
+    }
+
+    public Double getTotal(){
+        return total;
     }
 }
