@@ -27,4 +27,6 @@
     <string name="tvCounter">0</string>
     <string name="save">Save</string>
     <string name="process">Process</string>
+    <string name="user_information">User Information</string>
+    <string name="order_information">Order Information</string>
 </resources>
