@@ -118,7 +118,7 @@ android:layout_height="wrap_content">
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/tv_item_order"
+            android:id="@+id/tv_item_payment_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
@@ -127,7 +127,7 @@ android:layout_height="wrap_content">
 
 
         <TextView
-            android:id="@+id/tv_qty_order"
+            android:id="@+id/tv_qty_payment_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
@@ -135,7 +135,7 @@ android:layout_height="wrap_content">
             tools:text="Qty" />
 
         <TextView
-            android:id="@+id/tv_price_order"
+            android:id="@+id/tv_price_payment_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"

@@ -53,7 +53,7 @@ public class ItemActivity extends AppCompatActivity {
     String qte;
 
     private RecyclerView rvItems;
-    private Button btnStoreList;
+    private Button btnStoreList, btnCreateStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +67,15 @@ public class ItemActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intentStoreList = new Intent( ItemActivity.this, StoreActivity.class );
                 startActivity( intentStoreList );
+            }
+        } );
+
+        btnCreateStore = (Button) findViewById( R.id.btn_open_store2 );
+        btnCreateStore.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentCreate = new Intent( ItemActivity.this, OpenStoreActivity.class );
+                startActivity( intentCreate );
             }
         } );
 
