@@ -51,11 +51,6 @@ public class PaymentActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -69,9 +64,9 @@ public class PaymentActivity extends AppCompatActivity {
 
         // add order information
 
-        tv_item_order = findViewById( R.id.tv_item_order);
-        tv_price_order = findViewById( R.id.tv_pr_order );
-        tv_qty_order = findViewById( R.id.tv_qty_order );
+        tv_item_order = findViewById( R.id.tv_item_payment_order);
+        tv_price_order = findViewById( R.id.tv_price_payment_order );
+        tv_qty_order = findViewById( R.id.tv_qty_payment_order );
 
         ItemCart item = new ItemCart( );
         item1 = item.getCategory();
@@ -83,7 +78,6 @@ public class PaymentActivity extends AppCompatActivity {
         nameOrder = (EditText) findViewById( R.id.et_name_order_process );
         emailOrder = (EditText) findViewById( R.id.et_email_order_process );
         phoneOrder = (EditText) findViewById( R.id.et_phone_order_process );
-
 
 
 

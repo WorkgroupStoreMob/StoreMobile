@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">StoreMobile</string>
     <string name="log_in">Log In</string>
-    <string name="my_store">Create my own store</string>
+    <string name="my_store">Create Store</string>
     <string name="new_items">New Items</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="phone_number">Phone Number</string>
@@ -16,7 +16,7 @@
     <string name="buying_price">Buying Price</string>
     <string name="selling_price">Selling Price</string>
     <string name="quantity">Quantity</string>
-    <string name="back_to_store_list">Back to Store list</string>
+    <string name="back_to_store_list"> Store List</string>
     <string name="todo">TODO</string>
     <string name="forget_your_password">Forget your password</string>
     <string name="click_here">Click here</string>
@@ -29,4 +29,5 @@
     <string name="process">Process</string>
     <string name="user_information">User Information</string>
     <string name="order_information">Order Information</string>
+    <string name="chaussure_pour_femme_sdjdfjgfjj">Chaussure pour femme sdjdfjgfjj</string>
 </resources>

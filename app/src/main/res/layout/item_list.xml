@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/items_CardView"
@@ -10,33 +10,26 @@
     android:layout_marginRight="5dp"
     app:cardCornerRadius="10dp">
 
-    <RelativeLayout
+
+    <ImageView
+        android:id="@+id/ivItem_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="261dp"
+        android:layout_below="@id/tv_category"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:scaleType="centerCrop"
+        tools:srcCompat="@tools:sample/avatars" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/ivItem_image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                tools:srcCompat="@tools:sample/avatars" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_category"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:textColor="@color/colorRougeApp"
                     android:textSize="20dp"
                     android:text="@string/category" />
@@ -46,33 +39,35 @@
                     android:id="@+id/tv_Desc"
                     android:layout_width="277dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_weight="1"
-                    android:text="Chaussure pour femme sdjdfjgfjj" />
+                    android:layout_below="@id/ivItem_image"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/chaussure_pour_femme_sdjdfjgfjj" />
 
 
 
                     <TextView
                     android:id="@+id/tv_Price"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/tv_Desc"
+                        android:layout_below="@id/ivItem_image"
                     android:layout_weight="1"
                     android:layout_marginLeft="5dp"
                     android:text="3500 gdes" />
 
 
 
-            </LinearLayout>
 
             <android.support.v7.widget.AppCompatImageButton
                 android:id="@+id/iv_btn_order1"
-                android:layout_width="42dp"
-                android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/ivItem_image"
+                android:backgroundTint="@color/colorLightBlue"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
                 android:background="#FFFFFF"
                 app:srcCompat="@drawable/ic_business_center_black_24dp" />
-        </LinearLayout>
-    </RelativeLayout>
 
-</android.support.v7.widget.CardView>
+
+</RelativeLayout>

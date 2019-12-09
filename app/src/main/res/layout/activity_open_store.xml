@@ -38,7 +38,7 @@
         android:layout_below="@id/et_name_open_store"
         android:layout_centerHorizontal="true"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:hint="@string/password"
         tools:ignore="TextFields" />
 

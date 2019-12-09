@@ -38,8 +38,12 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginRight="5dp"
         android:layout_marginTop="15dp"
+        android:textAllCaps="false"
+        android:background="@drawable/cornerbutton1"
+        android:textColor="@color/colorWhite"
+        android:textSize="18dp"
         android:text="@string/my_store" />
 
     <Button
@@ -48,10 +52,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="15dp"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="15dp"
-        android:text="@string/back_to_store_list" />
+        android:textAllCaps="false"
+        android:layout_marginBottom="15dp"
+        android:text="@string/back_to_store_list"
+        android:background="@drawable/cornerbutton"
+        android:textColor="@color/colorWhite"
+        android:textSize="18dp" />
 
     <TextView
         android:id="@+id/tv_incrementCart"
